@@ -78,7 +78,7 @@ class OrderHistoryTableViewController: UITableViewController {
             }
             
             if let destination = segue.destination as? OrderDetailViewController, let order = order {
-                destination.configure(tableConfiguration: OrderDetailTableConfiguration(orderType: .historical), order: order)
+                destination.configure(tableConfiguration: OrderDetailTableConfiguration(for: .historicalOrder), order: order)
             }
         } else if segue.identifier == SegueIdentifiers.configureMenu.rawValue {
             if let navController = segue.destination as? UINavigationController,
@@ -151,7 +151,7 @@ extension OrderHistoryTableViewController {
         cell.imageView?.image = UIImage(named: order.menuItem.iconImageName)
         cell.imageView?.applyRoundedCorners()
         
-        cell.textLabel?.text = "\(order.quantity) \(order.menuItem.itemName)"
+        cell.textLabel?.text = "\(order.quantity) \(order.menuItem.localizedName())"
         cell.detailTextLabel?.text = dateFormatter.string(from: order.date)
         return cell
     }

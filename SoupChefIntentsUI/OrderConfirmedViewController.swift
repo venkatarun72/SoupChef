@@ -32,7 +32,7 @@ class OrderConfirmedViewController: UIViewController {
         confirmationView = view as? OrderConfirmedView
         
         if let order = Order(from: intent) {
-            confirmationView.itemNameLabel.text = order.menuItem.itemName
+            confirmationView.itemNameLabel.text = order.menuItem.localizedName()
             confirmationView.imageView.applyRoundedCorners()
             if let orderDetails = intentResponse.orderDetails {
                 confirmationView.timeLabel.text = orderDetails.displayString

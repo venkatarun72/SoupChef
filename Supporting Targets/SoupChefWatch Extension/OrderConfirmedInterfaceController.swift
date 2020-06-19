@@ -12,6 +12,8 @@ import SoupKitWatch
 /// Displays confirmation after placing an order.
 class OrderConfirmedInterfaceController: WKInterfaceController {
 
+    static let controllerIdentifier = "orderComplete"
+    
     @IBOutlet var image: WKInterfaceImage!
     
     override func awake(withContext context: Any?) {

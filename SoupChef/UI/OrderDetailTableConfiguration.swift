@@ -10,8 +10,8 @@ import SoupKit
 
 struct OrderDetailTableConfiguration {
     
-    enum OrderType {
-        case new, historical
+    enum Purpose {
+        case newOrder, historicalOrder
     }
     
     enum SectionType: String {
@@ -26,10 +26,10 @@ struct OrderDetailTableConfiguration {
         case quantity = "Quantity Cell"
     }
     
-    public let orderType: OrderType
+    public let purpose: Purpose
     
-    init(orderType: OrderType) {
-        self.orderType = orderType
+    init(for purpose: Purpose) {
+        self.purpose = purpose
     }
     
     typealias SectionModel = (type: SectionType, rowCount: Int, cellReuseIdentifier: String)
@@ -41,7 +41,7 @@ struct OrderDetailTableConfiguration {
                                                                             rowCount: 1,
                                                                             cellReuseIdentifier: ReuseIdentifiers.quantity.rawValue),
                                                                SectionModel(type: .toppings,
-                                                                            rowCount: Order.MenuItemTopping.all.count,
+                                                                            rowCount: Order.MenuItemTopping.allCases.count,
                                                                             cellReuseIdentifier: ReuseIdentifiers.basic.rawValue),
                                                                SectionModel(type: .total,
                                                                             rowCount: 1,
@@ -51,16 +51,16 @@ struct OrderDetailTableConfiguration {
                                                                                    rowCount: 1,
                                                                                    cellReuseIdentifier: ReuseIdentifiers.quantity.rawValue),
                                                                       SectionModel(type: .toppings,
-                                                                                   rowCount: Order.MenuItemTopping.all.count,
+                                                                                   rowCount: Order.MenuItemTopping.allCases.count,
                                                                                    cellReuseIdentifier: ReuseIdentifiers.basic.rawValue),
                                                                       SectionModel(type: .total,
                                                                                    rowCount: 1,
                                                                                    cellReuseIdentifier: ReuseIdentifiers.basic.rawValue)]
     
     var sections: [SectionModel] {
-        switch orderType {
-            case .new: return OrderDetailTableConfiguration.newOrderSectionModel
-            case .historical: return OrderDetailTableConfiguration.historicalOrderSectionModel
+        switch purpose {
+            case .newOrder: return OrderDetailTableConfiguration.newOrderSectionModel
+            case .historicalOrder: return OrderDetailTableConfiguration.historicalOrderSectionModel
         }
     }
 }

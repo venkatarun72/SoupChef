@@ -2,24 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CHICKEN_NOODLE_SOUP_SUBTITLE</key>
+	<key>MANHATTAN_CLAM_CHOWDER_SUBTITLE</key>
 	<dict>
 		<key>NSStringVariableWidthRuleType</key>
 		<dict>
 			<key>20</key>
-			<string>Chicken noodle</string>
+			<string>Clam chowder</string>
 			<key>24</key>
-			<string>Chicken noodle soup</string>
+			<string>Manhattan clam chowder</string>
 		</dict>
 	</dict>
-	<key>CHICKEN_NOODLE_SOUP</key>
+	<key>MANHATTAN_CLAM_CHOWDER</key>
 	<dict>
 		<key>NSStringVariableWidthRuleType</key>
 		<dict>
 			<key>20</key>
-			<string>chicken noodle</string>
+			<string>Clam chowder</string>
 			<key>24</key>
-			<string>chicken noodle soup</string>
+			<string>Manhattan Clam Chowder</string>
 		</dict>
 	</dict>
 </dict>

@@ -3,16 +3,22 @@ See LICENSE folder for this sample’s licensing information.
 
 Abstract:
 The strings in this file and `Localizable.stringsdict` demonstrate how to localize the information
- in an intent and a user activity when displayed in Siri, Search, the Cover Sheet, and Settings.
+ in an intent and a user activity when displayed in Siri, Search, the Cover Sheet, and the Shortcuts app.
  Interface strings not used in these contexts are not localized.
 */
 
-"TOMATO_SOUP" = "tomato soup";
-"CLAM_CHOWDER" = "clam chowder";
+"TOMATO_SOUP" = "Tomato Soup";
+"NE_CLAM_CHOWDER" = "New England Clam Chowder";
+"CHICKEN_NOODLE_SOUP" = "Chicken Noodle Soup";
 
-"CHEESE" = "cheese";
-"RED_PEPPER" = "red pepper";
-"CROUTONS" = "croutons";
+"TOMATO_SOUP_DESCRIPTION" = "Contains: Tomatoes";
+"NE_CLAM_CHOWDER_DESCRIPTION" = "Contains: Clams";
+"MANHATTAN_CLAM_CHOWDER_DESCRIPTION" = "Contains: Clams, tomatoes";
+"CHICKEN_NOODLE_SOUP_DESCRIPTION" = "Contains: Chicken, noodles";
+
+"CHEESE" = "Cheese";
+"RED_PEPPER" = "Red Pepper";
+"CROUTONS" = "Croutons";
 
 "ORDER_LUNCH_TITLE" = "Order lunch";
 "ORDER_LUNCH_SUGGESTED_PHRASE" = "Start lunch order";

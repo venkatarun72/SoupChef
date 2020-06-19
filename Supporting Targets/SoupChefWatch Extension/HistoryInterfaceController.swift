@@ -44,7 +44,7 @@ class HistoryInterfaceController: WKInterfaceController {
             
             let rowData = tableData[rowIndex]
             let dateString = dateFormatter.string(from: rowData.date)
-            elementRow.itemOrdered.setText(rowData.menuItem.itemName)
+            elementRow.itemOrdered.setText(rowData.menuItem.localizedName())
             elementRow.orderTime.setText(dateString)
         }
     }

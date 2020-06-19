@@ -17,10 +17,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         
         rootController.popToRootController()
         
-        if userActivity.activityType == NSUserActivity.viewMenuActivityType ||
-            userActivity.activityType == NSStringFromClass(OrderSoupIntent.self) {
-            rootController.pushController(withName: MenuInterfaceController.controllerIdentifier, context: nil)
+        if userActivity.activityType == NSStringFromClass(OrderSoupIntent.self),
+            let intent = userActivity.interaction?.intent as? OrderSoupIntent {
             
+            // This order can come from the "Chicken Noodle Soup" special menu item that is
+            // donated to the system as a relevant shortcut on the Siri watch face.
+            let order = Order(from: intent)
+            rootController.pushController(withName: MenuInterfaceController.controllerIdentifier, context: order)
+            
+        } else if userActivity.activityType == NSUserActivity.viewMenuActivityType {
+            
+            rootController.pushController(withName: MenuInterfaceController.controllerIdentifier, context: nil)
         } else if userActivity.activityType == NSUserActivity.orderCompleteActivityType,
             (userActivity.userInfo?[NSUserActivity.ActivityKeys.orderID.rawValue] as? UUID) != nil {
                 

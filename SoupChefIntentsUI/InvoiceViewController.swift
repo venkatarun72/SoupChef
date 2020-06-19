@@ -27,7 +27,7 @@ class InvoiceViewController: UIViewController {
         super.viewDidLoad()
         
         if let order = Order(from: intent) {
-            invoiceView.itemNameLabel.text = order.menuItem.itemName
+            invoiceView.itemNameLabel.text = order.menuItem.localizedName()
             invoiceView.imageView.applyRoundedCorners()
             invoiceView.totalPriceLabel.text = order.localizedCurrencyValue
             invoiceView.unitPriceLabel.text = "\(order.quantity) @ \(order.menuItem.localizedCurrencyValue)"

@@ -16,12 +16,17 @@ class MenuInterfaceController: WKInterfaceController {
     static let controllerIdentifier = "menu"
     private static let confirmOrderSegue = "confirmOrderSegue"
         
-    let tableData = SoupMenuManager().availableRegularItems
+    let tableData = SoupMenuManager().findItems(exactlyMatching: [.available, .regularItem], [.available, .dailySpecialItem])
     
     @IBOutlet var interfaceTable: WKInterfaceTable!
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        
+        if let order = context as? Order {
+            presentController(withName: OrderConfirmedInterfaceController.controllerIdentifier, context: order)
+        }
+        
         loadTableRows()
     }
     
@@ -43,7 +48,7 @@ class MenuInterfaceController: WKInterfaceController {
                 return
             }
             let rowData = tableData[rowIndex]
-            elementRow.soupName.setText(rowData.itemName)
+            elementRow.soupName.setText(rowData.localizedName())
             elementRow.soupImage.setImage(UIImage(named: rowData.iconImageName))
         }
     }

@@ -6,59 +6,6 @@
 	<array>
 		<dict>
 			<key>INEnumDisplayName</key>
-			<string>Soup</string>
-			<key>INEnumDisplayNameID</key>
-			<string>1ttLJq</string>
-			<key>INEnumGeneratesHeader</key>
-			<true/>
-			<key>INEnumName</key>
-			<string>Soup</string>
-			<key>INEnumType</key>
-			<string>Regular</string>
-			<key>INEnumValues</key>
-			<array>
-				<dict>
-					<key>INEnumValueDisplayName</key>
-					<string>unknown</string>
-					<key>INEnumValueDisplayNameID</key>
-					<string>J7DRHq</string>
-					<key>INEnumValueName</key>
-					<string>unknown</string>
-				</dict>
-				<dict>
-					<key>INEnumValueDisplayName</key>
-					<string>Clam Chowder</string>
-					<key>INEnumValueDisplayNameID</key>
-					<string>RWJQKu</string>
-					<key>INEnumValueIndex</key>
-					<integer>1</integer>
-					<key>INEnumValueName</key>
-					<string>clamChowder</string>
-				</dict>
-				<dict>
-					<key>INEnumValueDisplayName</key>
-					<string>Tomato Soup</string>
-					<key>INEnumValueDisplayNameID</key>
-					<string>Y9pZX8</string>
-					<key>INEnumValueIndex</key>
-					<integer>2</integer>
-					<key>INEnumValueName</key>
-					<string>tomatoSoup</string>
-				</dict>
-				<dict>
-					<key>INEnumValueDisplayName</key>
-					<string>Chicken Noodle Soup</string>
-					<key>INEnumValueDisplayNameID</key>
-					<string>NDSZth</string>
-					<key>INEnumValueIndex</key>
-					<integer>3</integer>
-					<key>INEnumValueName</key>
-					<string>chickenNoodleSoup</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>INEnumDisplayName</key>
 			<string>Order Type</string>
 			<key>INEnumDisplayNameID</key>
 			<string>ZQXyvx</string>
@@ -102,11 +49,11 @@
 		</dict>
 	</array>
 	<key>INIntentDefinitionModelVersion</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>INIntentDefinitionNamespace</key>
 	<string>RUnQ3n</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>11.0</string>
+	<string>12.0</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -123,7 +70,7 @@
 			<key>INIntentKeyParameter</key>
 			<string>soup</string>
 			<key>INIntentLastParameterTag</key>
-			<integer>15</integer>
+			<integer>17</integer>
 			<key>INIntentManagedParameterCombinations</key>
 			<dict>
 				<key>soup,quantity,orderType,deliveryLocation,toppings</key>
@@ -253,6 +200,8 @@
 			<key>INIntentParameters</key>
 			<array>
 				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
 					<key>INIntentParameterCustomDisambiguation</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
@@ -261,12 +210,12 @@
 					<string>11eJSS</string>
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>1</integer>
-					<key>INIntentParameterEnumType</key>
-					<string>Soup</string>
-					<key>INIntentParameterEnumTypeNamespace</key>
-					<string>RUnQ3n</string>
 					<key>INIntentParameterName</key>
 					<string>soup</string>
+					<key>INIntentParameterObjectType</key>
+					<string>Soup</string>
+					<key>INIntentParameterObjectTypeNamespace</key>
+					<string>RUnQ3n</string>
 					<key>INIntentParameterPromptDialogs</key>
 					<array>
 						<dict>
@@ -296,14 +245,20 @@
 							<string>DisambiguationSelection</string>
 						</dict>
 					</array>
+					<key>INIntentParameterSupportsDynamicEnumeration</key>
+					<true/>
 					<key>INIntentParameterSupportsResolution</key>
 					<true/>
+					<key>INIntentParameterSupportsSearch</key>
+					<true/>
 					<key>INIntentParameterTag</key>
-					<integer>9</integer>
+					<integer>17</integer>
 					<key>INIntentParameterType</key>
-					<string>Integer</string>
+					<string>Object</string>
 				</dict>
 				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
 					<key>INIntentParameterCustomDisambiguation</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
@@ -362,7 +317,7 @@
 							<key>INIntentParameterUnsupportedReasonDefault</key>
 							<true/>
 							<key>INIntentParameterUnsupportedReasonFormatString</key>
-							<string>${displayName} can't be negative.</string>
+							<string>${displayName} can’t be negative.</string>
 							<key>INIntentParameterUnsupportedReasonFormatStringID</key>
 							<string>puIu44</string>
 						</dict>
@@ -372,7 +327,7 @@
 							<key>INIntentParameterUnsupportedReasonDefault</key>
 							<true/>
 							<key>INIntentParameterUnsupportedReasonFormatString</key>
-							<string>${displayName} can't be higher than ${maximumValue}.</string>
+							<string>${displayName} can’t be higher than ${maximumValue}.</string>
 							<key>INIntentParameterUnsupportedReasonFormatStringID</key>
 							<string>OftsUe</string>
 						</dict>
@@ -382,7 +337,7 @@
 							<key>INIntentParameterUnsupportedReasonDefault</key>
 							<true/>
 							<key>INIntentParameterUnsupportedReasonFormatString</key>
-							<string>${displayName} can't be lower than ${minimumValue}.</string>
+							<string>${displayName} can’t be lower than ${minimumValue}.</string>
 							<key>INIntentParameterUnsupportedReasonFormatStringID</key>
 							<string>3LLhnv</string>
 						</dict>
@@ -399,6 +354,8 @@
 					</array>
 				</dict>
 				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
 					<key>INIntentParameterCustomDisambiguation</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
@@ -409,6 +366,10 @@
 					<integer>3</integer>
 					<key>INIntentParameterName</key>
 					<string>toppings</string>
+					<key>INIntentParameterObjectType</key>
+					<string>Topping</string>
+					<key>INIntentParameterObjectTypeNamespace</key>
+					<string>RUnQ3n</string>
 					<key>INIntentParameterPromptDialogs</key>
 					<array>
 						<dict>
@@ -427,14 +388,6 @@
 							<key>INIntentParameterPromptDialogType</key>
 							<string>DisambiguationSelection</string>
 						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${toppings}’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>m9OdUs</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
-						</dict>
 					</array>
 					<key>INIntentParameterSupportsDynamicEnumeration</key>
 					<true/>
@@ -443,11 +396,13 @@
 					<key>INIntentParameterSupportsResolution</key>
 					<true/>
 					<key>INIntentParameterTag</key>
-					<integer>8</integer>
+					<integer>16</integer>
 					<key>INIntentParameterType</key>
 					<string>Object</string>
 				</dict>
 				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
 					<key>INIntentParameterCustomDisambiguation</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
@@ -504,6 +459,8 @@
 					<string>Integer</string>
 				</dict>
 				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
 					<key>INIntentParameterDisplayName</key>
 					<string>Delivery Location</string>
 					<key>INIntentParameterDisplayNameID</key>
@@ -553,6 +510,8 @@
 					<string>Placemark</string>
 				</dict>
 				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
 					<key>INIntentParameterCustomDisambiguation</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
@@ -670,7 +629,7 @@
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
-				<integer>14</integer>
+				<integer>15</integer>
 				<key>INIntentResponseOutput</key>
 				<string>orderDetails</string>
 				<key>INIntentResponseParameters</key>
@@ -682,16 +641,16 @@
 						<string>PKNedT</string>
 						<key>INIntentResponseParameterDisplayPriority</key>
 						<integer>1</integer>
-						<key>INIntentResponseParameterEnumType</key>
-						<string>Soup</string>
-						<key>INIntentResponseParameterEnumTypeNamespace</key>
-						<string>RUnQ3n</string>
 						<key>INIntentResponseParameterName</key>
 						<string>soup</string>
+						<key>INIntentResponseParameterObjectType</key>
+						<string>Soup</string>
+						<key>INIntentResponseParameterObjectTypeNamespace</key>
+						<string>RUnQ3n</string>
 						<key>INIntentResponseParameterTag</key>
-						<integer>8</integer>
+						<integer>15</integer>
 						<key>INIntentResponseParameterType</key>
-						<string>Integer</string>
+						<string>Object</string>
 					</dict>
 					<dict>
 						<key>INIntentResponseParameterDisplayName</key>
@@ -842,6 +801,132 @@
 					<integer>105</integer>
 					<key>INTypePropertyType</key>
 					<string>CurrencyAmount</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>INTypeDisplayName</key>
+			<string>Topping</string>
+			<key>INTypeDisplayNameID</key>
+			<string>7gFM8u</string>
+			<key>INTypeLastPropertyTag</key>
+			<integer>99</integer>
+			<key>INTypeName</key>
+			<string>Topping</string>
+			<key>INTypeProperties</key>
+			<array>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>1</integer>
+					<key>INTypePropertyName</key>
+					<string>identifier</string>
+					<key>INTypePropertyTag</key>
+					<integer>1</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>2</integer>
+					<key>INTypePropertyName</key>
+					<string>displayString</string>
+					<key>INTypePropertyTag</key>
+					<integer>2</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>3</integer>
+					<key>INTypePropertyName</key>
+					<string>pronunciationHint</string>
+					<key>INTypePropertyTag</key>
+					<integer>3</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>4</integer>
+					<key>INTypePropertyName</key>
+					<string>alternativeSpeakableMatches</string>
+					<key>INTypePropertySupportsMultipleValues</key>
+					<true/>
+					<key>INTypePropertyTag</key>
+					<integer>4</integer>
+					<key>INTypePropertyType</key>
+					<string>SpeakableString</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>INTypeDisplayName</key>
+			<string>Soup</string>
+			<key>INTypeDisplayNameID</key>
+			<string>LClEuk</string>
+			<key>INTypeLastPropertyTag</key>
+			<integer>99</integer>
+			<key>INTypeName</key>
+			<string>Soup</string>
+			<key>INTypeProperties</key>
+			<array>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>1</integer>
+					<key>INTypePropertyName</key>
+					<string>identifier</string>
+					<key>INTypePropertyTag</key>
+					<integer>1</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>2</integer>
+					<key>INTypePropertyName</key>
+					<string>displayString</string>
+					<key>INTypePropertyTag</key>
+					<integer>2</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>3</integer>
+					<key>INTypePropertyName</key>
+					<string>pronunciationHint</string>
+					<key>INTypePropertyTag</key>
+					<integer>3</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>4</integer>
+					<key>INTypePropertyName</key>
+					<string>alternativeSpeakableMatches</string>
+					<key>INTypePropertySupportsMultipleValues</key>
+					<true/>
+					<key>INTypePropertyTag</key>
+					<integer>4</integer>
+					<key>INTypePropertyType</key>
+					<string>SpeakableString</string>
 				</dict>
 			</array>
 		</dict>

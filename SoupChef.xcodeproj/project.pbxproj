@@ -57,6 +57,7 @@
 		29D1F3D320AA937600C97CDF /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D1F3D120AA937600C97CDF /* Localizable.swift */; };
 		29D3F96D20AE2B9100B68560 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29D3F96B20AE2B9100B68560 /* Assets.xcassets */; };
 		29D3F9B220AE315800B68560 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 294C6C3C20AE255A002A46C4 /* SharedAssets.xcassets */; };
+		3013B13A24847657002881BC /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 294C6C3C20AE255A002A46C4 /* SharedAssets.xcassets */; };
 		6029C1B720D9CAEE003CA478 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 294C6C3C20AE255A002A46C4 /* SharedAssets.xcassets */; };
 		6029C1B920D9CFFE003CA478 /* SoupMenuManager+Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6029C1B820D9CFFE003CA478 /* SoupMenuManager+Intents.swift */; };
 		6029C1BA20D9CFFE003CA478 /* SoupMenuManager+Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6029C1B820D9CFFE003CA478 /* SoupMenuManager+Intents.swift */; };
@@ -80,6 +81,11 @@
 		60C80CCA20E3737A00270927 /* Order+Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C80CC820E3737A00270927 /* Order+Intents.swift */; };
 		60C80CCB20E3745F00270927 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60631C1E20D9C5D300F65100 /* UIImage+Extension.swift */; };
 		60E0132A20FA900E00D0E727 /* Intents.intentdefinition in Resources */ = {isa = PBXBuildFile; fileRef = 298308C120B0F309006FDD95 /* Intents.intentdefinition */; };
+		60F40DC32488D35500F7B9E2 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 6041F8C420F96CAC00AFC5D2 /* Localizable.stringsdict */; };
+		60F40DC42488D35700F7B9E2 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 6041F8C420F96CAC00AFC5D2 /* Localizable.stringsdict */; };
+		60F40DC52488D35A00F7B9E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6041F8C220F96CAC00AFC5D2 /* Localizable.strings */; };
+		60F40DC82488D36300F7B9E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6041F8C220F96CAC00AFC5D2 /* Localizable.strings */; };
+		60F40DC92488D36B00F7B9E2 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 6041F8C420F96CAC00AFC5D2 /* Localizable.stringsdict */; };
 		D7115420209A48A1005588F4 /* Main.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = D7115422209A48A1005588F4 /* Main.storyboard */; };
 		D715F20820897745002A64CD /* OrderHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D715F20620897745002A64CD /* OrderHistoryTableViewController.swift */; };
 		D715F21020897753002A64CD /* SoupMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D715F20C20897753002A64CD /* SoupMenuViewController.swift */; };
@@ -287,8 +293,8 @@
 		606C6DE82076EF09009F09CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60C80CC820E3737A00270927 /* Order+Intents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Order+Intents.swift"; sourceTree = "<group>"; };
 		60EA6D8820782A9300249FFB /* SoupChef.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoupChef.entitlements; sourceTree = "<group>"; };
-		77EE283077EE944000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
-		79E2F19079E3376000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		BB4C37508A45F62FA7FB0008 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
 		D7115421209A48A1005588F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D7115423209A805C005588F4 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		D7115427209A808A005588F4 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
@@ -497,8 +503,8 @@
 				2981E7A120AABB62003259CF /* Supporting Targets */,
 				606C6DDF2076EF08009F09CA /* Frameworks */,
 				606C6DBB2076EEE8009F09CA /* Products */,
-				79E373A079E3031000000001 /* Configuration */,
-				77EE20E077EE73A000000001 /* LICENSE */,
+				8574D98C9738DB228A7D44EF /* Configuration */,
+				83C1B6EBDEBC3608667E2536 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -558,19 +564,19 @@
 			path = SoupChefIntentsUI;
 			sourceTree = "<group>";
 		};
-		77EE20E077EE73A000000001 /* LICENSE */ = {
+		83C1B6EBDEBC3608667E2536 /* LICENSE */ = {
 			isa = PBXGroup;
 			children = (
-				77EE283077EE944000000001 /* LICENSE.txt */,
+				BB4C37508A45F62FA7FB0008 /* LICENSE.txt */,
 			);
 			name = LICENSE;
 			path = LICENSE;
 			sourceTree = "<group>";
 		};
-		79E373A079E3031000000001 /* Configuration */ = {
+		8574D98C9738DB228A7D44EF /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				79E2F19079E3376000000001 /* SampleCode.xcconfig */,
+				8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -617,7 +623,6 @@
 				292B744D20A94BF40038A692 /* Sources */,
 				292B744E20A94BF40038A692 /* Frameworks */,
 				292B744F20A94BF40038A692 /* Resources */,
-				C3909770C390BB3000000001,
 			);
 			buildRules = (
 			);
@@ -634,7 +639,6 @@
 			buildPhases = (
 				292B748420A94C190038A692 /* Resources */,
 				292B74A420A94C1B0038A692 /* Embed App Extensions */,
-				C3909850C391F8E000000001,
 			);
 			buildRules = (
 			);
@@ -655,7 +659,6 @@
 				292B749020A94C1A0038A692 /* Resources */,
 				292B74B920A94C230038A692 /* Embed Frameworks */,
 				292B74C920A94C450038A692 /* Embed App Extensions */,
-				C39096F0C391644000000001,
 			);
 			buildRules = (
 			);
@@ -676,7 +679,6 @@
 				292B74A920A94C230038A692 /* Sources */,
 				292B74AA20A94C230038A692 /* Frameworks */,
 				292B74AB20A94C230038A692 /* Resources */,
-				C3909890C390DEF000000001,
 			);
 			buildRules = (
 			);
@@ -694,7 +696,6 @@
 				292B74BA20A94C450038A692 /* Sources */,
 				292B74BB20A94C450038A692 /* Frameworks */,
 				292B74BC20A94C450038A692 /* Resources */,
-				C39099C0C390DD9000000001,
 			);
 			buildRules = (
 			);
@@ -714,10 +715,8 @@
 				606C6DB72076EEE8009F09CA /* Frameworks */,
 				606C6DB82076EEE8009F09CA /* Resources */,
 				606C6DF52076EF09009F09CA /* Embed App Extensions */,
-				602A55882076EFE60057E0D1,
 				602A55962076F1050057E0D1 /* Embed Frameworks */,
 				29F0E4FF20A5517500096FA9 /* Embed Watch Content */,
-				C390E740C390B3F000000001,
 			);
 			buildRules = (
 			);
@@ -739,7 +738,6 @@
 				606C6DD12076EF08009F09CA /* Sources */,
 				606C6DD22076EF08009F09CA /* Frameworks */,
 				606C6DD32076EF08009F09CA /* Resources */,
-				C390D2D0C390D12000000001,
 			);
 			buildRules = (
 			);
@@ -758,7 +756,6 @@
 				606C6DDA2076EF08009F09CA /* Sources */,
 				606C6DDB2076EF08009F09CA /* Frameworks */,
 				606C6DDC2076EF08009F09CA /* Resources */,
-				C390B9D0C390CB2000000001,
 			);
 			buildRules = (
 			);
@@ -777,7 +774,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					292B745020A94BF40038A692 = {
@@ -902,6 +899,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				18038DFB227F590000473D42 /* Intents.stringsdict in Resources */,
+				60F40DC82488D36300F7B9E2 /* Localizable.strings in Resources */,
+				60F40DC92488D36B00F7B9E2 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +920,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3013B13A24847657002881BC /* SharedAssets.xcassets in Resources */,
+				60F40DC42488D35700F7B9E2 /* Localizable.stringsdict in Resources */,
 				18038DF8227F58FC00473D42 /* Intents.stringsdict in Resources */,
 				181546BC22662FA10070A877 /* Localizable.strings in Resources */,
 			);
@@ -930,7 +931,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60F40DC52488D35A00F7B9E2 /* Localizable.strings in Resources */,
 				1848ECF222761A6800C4D680 /* SharedAssets.xcassets in Resources */,
+				60F40DC32488D35500F7B9E2 /* Localizable.stringsdict in Resources */,
 				6052023620D9C4EA000C1972 /* InvoiceView.xib in Resources */,
 				6052023720D9C4EA000C1972 /* OrderConfirmedView.xib in Resources */,
 			);
@@ -1164,7 +1167,7 @@
 /* Begin XCBuildConfiguration section */
 		292B745B20A94BF40038A692 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1183,11 +1186,13 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.SoupKit";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1197,7 +1202,7 @@
 		};
 		292B745C20A94BF40038A692 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1216,10 +1221,12 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.SoupKit";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1229,7 +1236,7 @@
 		};
 		292B74A220A94C1B0038A692 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Supporting Targets/SoupChefWatch Extension/SoupChefWatch Extension.entitlements";
@@ -1241,6 +1248,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -1255,7 +1263,7 @@
 		};
 		292B74A320A94C1B0038A692 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Supporting Targets/SoupChefWatch Extension/SoupChefWatch Extension.entitlements";
@@ -1267,6 +1275,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1280,7 +1289,7 @@
 		};
 		292B74A620A94C1B0038A692 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1288,6 +1297,7 @@
 				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = SoupChefWatch_Extension;
 				INFOPLIST_FILE = "Supporting Targets/SoupChefWatch/Info.plist";
+				MARKETING_VERSION = 1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1301,7 +1311,7 @@
 		};
 		292B74A720A94C1B0038A692 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1309,6 +1319,7 @@
 				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = SoupChefWatch_Extension;
 				INFOPLIST_FILE = "Supporting Targets/SoupChefWatch/Info.plist";
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1321,7 +1332,7 @@
 		};
 		292B74B720A94C230038A692 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1339,6 +1350,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.SoupKitWatch";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1355,7 +1367,7 @@
 		};
 		292B74B820A94C230038A692 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1373,6 +1385,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.SoupKitWatch";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1388,7 +1401,7 @@
 		};
 		292B74C720A94C450038A692 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Supporting Targets/SoupChefIntentsWatch/SoupChefIntentsWatch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -1400,6 +1413,7 @@
 					"@executable_path/../../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.watchkitapp.watchkitextension.SoupChefIntentsWatch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1414,7 +1428,7 @@
 		};
 		292B74C820A94C450038A692 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Supporting Targets/SoupChefIntentsWatch/SoupChefIntentsWatch.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -1426,6 +1440,7 @@
 					"@executable_path/../../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.watchkitapp.watchkitextension.SoupChefIntentsWatch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1439,7 +1454,7 @@
 		};
 		606C6DCC2076EEE9009F09CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1464,6 +1479,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1495,13 +1511,13 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		606C6DCD2076EEE9009F09CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1526,6 +1542,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1550,14 +1567,14 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		606C6DCF2076EEE9009F09CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1570,6 +1587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1580,7 +1598,7 @@
 		};
 		606C6DD02076EEE9009F09CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1593,6 +1611,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1603,7 +1622,7 @@
 		};
 		606C6DF02076EF09009F09CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -1614,6 +1633,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.SoupChefIntentsUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1625,7 +1645,7 @@
 		};
 		606C6DF12076EF09009F09CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -1636,6 +1656,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.SoupChefIntentsUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1647,7 +1668,7 @@
 		};
 		606C6DF32076EF09009F09CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Supporting Targets/SoupChefIntents/SoupChefIntents.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -1659,6 +1680,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.SoupChefIntents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1670,7 +1692,7 @@
 		};
 		606C6DF42076EF09009F09CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79E2F19079E3376000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 8DBBA308BAEF3EC89AC6FBEA /* SampleCode.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Supporting Targets/SoupChefIntents/SoupChefIntents.entitlements";
 				CODE_SIGN_STYLE = Automatic;
@@ -1682,6 +1704,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SoupChef${SAMPLE_CODE_DISAMBIGUATOR}.SoupChefIntents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -12,8 +12,8 @@ import SoupKit
 
 class ConfigureMenuTableViewController: UITableViewController {
 
-    enum SectionType {
-        case regularItems, specialItems
+    private enum SectionType {
+        case visibleMenu, hiddenMenu
     }
     
     private typealias SectionModel = (sectionType: SectionType, sectionHeaderText: String, sectionFooterText: String, rowContent: [MenuItem])
@@ -34,15 +34,14 @@ class ConfigureMenuTableViewController: UITableViewController {
     }
     
     private func reloadData() {
-        sectionData =  [SectionModel(sectionType: .regularItems,
-                                     sectionHeaderText: "Regular Menu Items",
+        sectionData =  [SectionModel(sectionType: .visibleMenu,
+                                     sectionHeaderText: "Visible Menu",
                                      sectionFooterText: "Uncheck a row to delete any donated shortcuts associated with the menu item.",
-                                     rowContent: soupMenuManager.regularItems),
-                        SectionModel(sectionType: .specialItems,
-                                     sectionHeaderText: "Daily Special Menu Items",
-                                     sectionFooterText: "Check a row in this section to provide a relevant shortcut.",
-                                     rowContent: soupMenuManager.dailySpecialItems)
-        ]
+                                     rowContent: soupMenuManager.findItems(containing: [.regularItem], [.dailySpecialItem])),
+                        SectionModel(sectionType: .hiddenMenu,
+                                     sectionHeaderText: "Hidden Menu",
+                                     sectionFooterText: "These menu items will only appear as relevant shortcuts on the Siri watch face.",
+                                     rowContent: soupMenuManager.findItems(containing: [.secretItem]))]
         tableView.reloadData()
     }
 }
@@ -62,8 +61,8 @@ extension ConfigureMenuTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Basic Cell", for: indexPath)
         let menuItem = sectionData[indexPath.section].rowContent[indexPath.row]
-        cell.textLabel?.text = menuItem.itemName
-        cell.accessoryType = menuItem.isAvailable ? .checkmark : .none
+        cell.textLabel?.text = menuItem.localizedName()
+        cell.accessoryType = menuItem.attributes.contains(.available) ? .checkmark : .none
         return cell
     }
 }
@@ -84,7 +83,11 @@ extension ConfigureMenuTableViewController {
         let sectionModel = sectionData[indexPath.section]
         let currentMenuItem = sectionModel.rowContent[indexPath.row]
         var newMenuItem = currentMenuItem
-        newMenuItem.isAvailable = !newMenuItem.isAvailable
+        if newMenuItem.attributes.contains(.available) {
+            newMenuItem.attributes.remove(.available)
+        } else {
+            newMenuItem.attributes.insert(.available)
+        }
         
         soupMenuManager.replaceMenuItem(currentMenuItem, with: newMenuItem)
         reloadData()

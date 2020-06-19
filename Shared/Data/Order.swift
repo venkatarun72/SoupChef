@@ -12,14 +12,21 @@ import Intents
 
 public struct Order: Codable {
     
-    public enum MenuItemTopping: String, Codable, LocalizableShortcutString {
+    public enum MenuItemTopping: String, Codable, CaseIterable, LocalizableShortcutString {
         case cheese = "Cheese"
         case redPepper = "Red Pepper"
         case croutons = "Croutons"
 
-        public static let all: [MenuItemTopping] = [.cheese, .redPepper, .croutons]
-
-        var shortcutLocalizationKey: String {
+        // See comments on `LocalizableShortcutString` to understand the `useDeferredIntentLocalization` value.
+        public func localizedName(useDeferredIntentLocalization: Bool = false) -> String {
+            if useDeferredIntentLocalization {
+                return NSString.deferredLocalizedIntentsString(with: localizationKey) as String
+            } else {
+              return NSLocalizedString(localizationKey, comment: "Topping name")
+            }
+        }
+        
+        private var localizationKey: String {
             switch self {
             case .cheese:
                 return "CHEESE"
@@ -52,23 +59,19 @@ public struct Order: Codable {
     public var deliveryLocation: Location?
     public var orderType: OrderType
     
-    public init(date: Date = Date(), identifier: UUID = UUID(), quantity: Int, menuItem: MenuItem, menuItemToppings: Set<MenuItemTopping>) {
+    public init(date: Date = Date(),
+                identifier: UUID = UUID(),
+                quantity: Int,
+                menuItem: MenuItem,
+                menuItemToppings: Set<MenuItemTopping>,
+                storeLocation: Location? = nil) {
         self.date = date
         self.identifier = identifier
         self.quantity = quantity
         self.menuItem = menuItem
         self.menuItemToppings = menuItemToppings
-        self.orderType = .unknown
-    }
-    
-    public init(date: Date = Date(),
-                identifier: UUID = UUID(),
-                quantity: Int, menuItem: MenuItem,
-                menuItemToppings: Set<MenuItemTopping>,
-                storeLocation: Location?) {
-        self.init(date: date, identifier: identifier, quantity: quantity, menuItem: menuItem, menuItemToppings: menuItemToppings)
-        self.storeLocation = storeLocation
         self.orderType = .pickup
+        self.storeLocation = storeLocation
     }
     
     public init(date: Date = Date(),
@@ -111,6 +114,17 @@ public struct Location: Codable {
     public var name: String?
     public var latitude: Double
     public var longitude: Double
+    
+    init(name: String?, latitude: Double, longitude: Double) {
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+    
+    init?(_ placemark: CLPlacemark?) {
+        guard let placemark = placemark, let location = placemark.location else { return nil }
+        self.init(name: placemark.name, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+    }
 }
 
 extension Location {

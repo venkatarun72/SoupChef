@@ -13,29 +13,22 @@ public typealias SoupMenu = Set<MenuItem>
 public class SoupMenuManager: DataManager<Set<MenuItem>> {
     
     private static let defaultMenu: SoupMenu = [
-        MenuItem(item: .chickenNoodleSoup,
-                 itemName: "Chicken Noodle Soup",
-                 shortcutNameKey: "CHICKEN_NOODLE_SOUP",
-                 price: 4.55, iconImageName: "chicken_noodle_soup",
-                 isAvailable: true,
+        MenuItem(identifier: .chickenNoodleSoup,
+                 price: 4.55,
                  itemsInStock: 5,
-                 isDailySpecial: true),
-        MenuItem(item: .clamChowder,
-                 itemName: "Clam Chowder",
-                 shortcutNameKey: "CLAM_CHOWDER",
+                 attributes: [.available, .dailySpecialItem]),
+        MenuItem(identifier: .newEnglandClamChowder,
                  price: 3.75,
-                 iconImageName: "clam_chowder",
-                 isAvailable: true,
                  itemsInStock: 7,
-                 isDailySpecial: false),
-        MenuItem(item: .tomatoSoup,
-                 itemName: "Tomato Soup",
-                 shortcutNameKey: "TOMATO_SOUP",
+                 attributes: [.available, .regularItem]),
+        MenuItem(identifier: .manhattanClamChowder,
+                 price: 3.50,
+                 itemsInStock: 2,
+                 attributes: [.available, .secretItem]),
+        MenuItem(identifier: .tomatoSoup,
                  price: 2.95,
-                 iconImageName: "tomato_soup",
-                 isAvailable: true,
                  itemsInStock: 4,
-                 isDailySpecial: false)
+                 attributes: [.available, .regularItem])
     ]
     
     public var orderManager: SoupOrderDataManager?
@@ -58,36 +51,6 @@ public class SoupMenuManager: DataManager<Set<MenuItem>> {
 /// Public API for clients of `SoupMenuManager`
 extension SoupMenuManager {
     
-    public var availableItems: [MenuItem] {
-        return dataAccessQueue.sync {
-            return managedData.filter { $0.isAvailable == true }.sortedByName()
-        }
-    }
-    
-    public var availableDailySpecialItems: [MenuItem] {
-        return dataAccessQueue.sync {
-            return managedData.filter { $0.isDailySpecial == true && $0.isAvailable == true }.sortedByName()
-        }
-    }
-    
-    public var dailySpecialItems: [MenuItem] {
-        return dataAccessQueue.sync {
-            return managedData.filter { $0.isDailySpecial == true }.sortedByName()
-        }
-    }
-    
-    public var regularItems: [MenuItem] {
-        return dataAccessQueue.sync {
-            return managedData.filter { $0.isDailySpecial == false }.sortedByName()
-        }
-    }
-    
-    public var availableRegularItems: [MenuItem] {
-        return dataAccessQueue.sync {
-            return managedData.filter { $0.isDailySpecial == false && $0.isAvailable == true }.sortedByName()
-        }
-    }
-    
     public func replaceMenuItem(_ previousMenuItem: MenuItem, with menuItem: MenuItem) {
         dataAccessQueue.sync {
             managedData.remove(previousMenuItem)
@@ -101,9 +64,30 @@ extension SoupMenuManager {
         updateShortcuts()
     }
     
-    public func findItem(soup: Soup) -> MenuItem? {
+    public func findItem(_ soup: Soup) -> MenuItem? {
         return dataAccessQueue.sync {
-            return managedData.first { $0.item == soup }
+            return managedData.first { $0.identifier == MenuItem.Identifier(rawValue: soup.identifier!) }
+        }
+    }
+    
+    /// Locates items by exactly matching the attributes. This means searching for `[.available]` and `[.available, .regularMenuItem]`
+    /// return different results.
+    public func findItems(exactlyMatching searchAttributes: MenuItem.Attributes..., searchTerm: String? = nil) -> [MenuItem] {
+        return dataAccessQueue.sync {
+            return managedData.filter { searchAttributes.contains($0.attributes) }.sortedByName().filter {
+                searchTerm == nil || $0.localizedName(useDeferredIntentLocalization: true).localizedCaseInsensitiveContains(searchTerm ?? "")
+            }
+        }
+    }
+    
+    /// Locates items containing  the attributes. This means searching for `[.regularMenuItem]` will return results for both
+    /// `[.regularMenuItem]` and `[.available, .regularMenuItem]`.
+    public func findItems(containing searchAttributes: MenuItem.Attributes...) -> [MenuItem] {
+        return dataAccessQueue.sync {
+     
+            return searchAttributes.reduce([MenuItem]()) { (result, attribute) -> [MenuItem] in
+                return result + managedData.filter { $0.attributes.contains(attribute) }
+            }.sortedByName()
         }
     }
 }
@@ -119,7 +103,7 @@ private extension UserDefaults {
 private extension Array where Element == MenuItem {
     func sortedByName() -> [MenuItem] {
         return sorted { (item1, item2) -> Bool in
-            item1.itemName.localizedCaseInsensitiveCompare(item2.itemName) == .orderedAscending
+            item1.localizedName().localizedCaseInsensitiveCompare(item2.localizedName()) == .orderedAscending
         }
     }
 }

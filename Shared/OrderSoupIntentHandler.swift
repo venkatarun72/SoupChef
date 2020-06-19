@@ -11,49 +11,70 @@ import Intents
 
 public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
     
-    /// - Tag: options
-    public func provideToppingsOptions(for intent: OrderSoupIntent, with completion: @escaping ([INObject]?, Error?) -> Void) {
-        // Map menu item toppings to custom objects and provide them to the user.
-        // The user will be able to choose one or more options.
-        let toppings = Order.MenuItemTopping.all.map { (topping) -> INObject in
-            let displayString = NSString.deferredLocalizedIntentsString(with: topping.shortcutLocalizationKey) as String
-            return INObject(identifier: topping.rawValue, display: displayString)
-        }
-        completion(toppings, nil)
+    // The Dynamic Options API allows you to provide a set of values for eligible parameters
+    // dynamically when the user is configuring this intent parameter in the Shortcuts app.
+    //
+    // This method will be called repeatedly while user is typing with the search term provided by the user.
+    @available(iOSApplicationExtension 14.0, watchOSApplicationExtension 7.0, *)
+    public func provideSoupOptionsCollection(for intent: OrderSoupIntent,
+                                             searchTerm: String?,
+                                             with completion: @escaping (INObjectCollection<Soup>?, Error?) -> Void) {
+        let soupMenuManager = SoupMenuManager()
+        
+        // Dynamic search should only be adopted for searching large catalogs,
+        // not for filtering small static collections because the Shortcuts app supports filtering by default.
+        let availableRegularItems = soupMenuManager.findItems(exactlyMatching: [.available, .regularItem],
+                                                              searchTerm: searchTerm)
+        let availableDailySpecialItems = soupMenuManager.findItems(exactlyMatching: [.available, .dailySpecialItem],
+                                                                   searchTerm: searchTerm)
+        
+        let objectCollection = INObjectCollection(sections: [
+            INObjectSection(title: "Regular", items: availableRegularItems.map { Soup(menuItem: $0) }),
+            INObjectSection(title: "Special", items: availableDailySpecialItems.map { Soup(menuItem: $0) })
+        ])
+        completion(objectCollection, nil)
     }
     
-    public func provideStoreLocationOptions(for intent: OrderSoupIntent, with completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
-        completion(Order.storeLocations, nil)
+    @available(iOSApplicationExtension 14.0, watchOSApplicationExtension 7.0, *)
+    public func provideToppingsOptionsCollection(for intent: OrderSoupIntent,
+                                                 with completion: @escaping (INObjectCollection<Topping>?, Error?) -> Void) {
+        completion(INObjectCollection(items: Topping.allCases), nil)
+    }
+    
+    @available(iOSApplicationExtension 14.0, watchOSApplicationExtension 7.0, *)
+    public func provideStoreLocationOptionsCollection(for intent: OrderSoupIntent,
+                                                      with completion: @escaping (INObjectCollection<CLPlacemark>?, Error?) -> Void) {
+        completion(INObjectCollection(items: Order.storeLocations), nil)
     }
     
     /// - Tag: resolve_intent
-    public func resolveToppings(for intent: OrderSoupIntent, with completion: @escaping ([INObjectResolutionResult]) -> Void) {
+    public func resolveToppings(for intent: OrderSoupIntent, with completion: @escaping ([ToppingResolutionResult]) -> Void) {
         guard let toppings = intent.toppings else {
-            completion([INObjectResolutionResult.needsValue()])
+            completion([ToppingResolutionResult.needsValue()])
             return
         }
         
         if toppings.isEmpty {
-            completion([INObjectResolutionResult.notRequired()])
+            completion([ToppingResolutionResult.notRequired()])
             return
         }
         
-        completion(toppings.map { (topping) -> INObjectResolutionResult in
-            return INObjectResolutionResult.success(with: topping)
+        completion(toppings.map { (topping) -> ToppingResolutionResult in
+            return ToppingResolutionResult.success(with: topping)
         })
     }
     
     public func resolveSoup(for intent: OrderSoupIntent, with completion: @escaping (SoupResolutionResult) -> Void) {
-        if intent.soup == .unknown {
-            completion(SoupResolutionResult.needsValue())
-        } else {
-            completion(SoupResolutionResult.success(with: intent.soup))
+        guard let soup = intent.soup else {
+            completion(SoupResolutionResult.disambiguation(with: Soup.allCases))
+            return
         }
+        completion(SoupResolutionResult.success(with: soup))
     }
     
     public func resolveQuantity(for intent: OrderSoupIntent, with completion: @escaping (OrderSoupQuantityResolutionResult) -> Void) {
         let soupMenuManager = SoupMenuManager()
-        guard let menuItem = soupMenuManager.findItem(soup: intent.soup) else {
+        guard let soup = intent.soup, let menuItem = soupMenuManager.findItem(soup) else {
             completion(OrderSoupQuantityResolutionResult.unsupported())
             return
         }
@@ -114,14 +135,14 @@ public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
         verify that any needed services are available. You might confirm that you can communicate with your company’s server
          */
         let soupMenuManager = SoupMenuManager()
-        guard let menuItem = soupMenuManager.findItem(soup: intent.soup) else {
-                completion(OrderSoupIntentResponse(code: .failure, userActivity: nil))
-                return
+        guard let soup = intent.soup, let menuItem = soupMenuManager.findItem(soup) else {
+            completion(OrderSoupIntentResponse(code: .failure, userActivity: nil))
+            return
         }
 
-        if menuItem.isAvailable == false {
+        if menuItem.attributes.contains(.available) == false {
             //  Here's an example of how to use a custom response for a failure case when a particular soup item is unavailable.
-            completion(OrderSoupIntentResponse.failureOutOfStock(soup: intent.soup))
+            completion(OrderSoupIntentResponse.failureOutOfStock(soup: soup))
             return
         }
         
@@ -131,7 +152,7 @@ public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
     
     public func handle(intent: OrderSoupIntent, completion: @escaping (OrderSoupIntentResponse) -> Void) {
 
-        guard let order = Order(from: intent)
+        guard let order = Order(from: intent), let soup = intent.soup
         else {
             completion(OrderSoupIntentResponse(code: .failure, userActivity: nil))
             return
@@ -162,13 +183,29 @@ public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
         
         let response: OrderSoupIntentResponse
         if let formattedWaitTime = formatter.string(from: orderDate, to: readyDate) {
-            response = OrderSoupIntentResponse.success(orderDetails: orderDetails, soup: intent.soup, waitTime: formattedWaitTime)
+            response = OrderSoupIntentResponse.success(orderDetails: orderDetails, soup: soup, waitTime: formattedWaitTime)
         } else {
             // A fallback success code with a less specific message string
-            response = OrderSoupIntentResponse.successReadySoon(orderDetails: orderDetails, soup: intent.soup)
+            response = OrderSoupIntentResponse.successReadySoon(orderDetails: orderDetails, soup: soup)
         }
         
         response.userActivity = userActivity
         completion(response)
     }
+    
+    // MARK: - Deprecated
+    // These methods provide backwards compatibility for `OrderSoupIntentHandling` on iOS 13
+    
+    public func provideSoupOptions(for intent: OrderSoupIntent, with completion: @escaping ([Soup]?, Error?) -> Void) {
+        completion(Soup.allCases, nil)
+    }
+    
+    public func provideToppingsOptions(for intent: OrderSoupIntent, with completion: @escaping ([Topping]?, Error?) -> Void) {
+        completion(Topping.allCases, nil)
+    }
+    
+    public func provideStoreLocationOptions(for intent: OrderSoupIntent, with completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
+        completion(Order.storeLocations, nil)
+    }
+
 }

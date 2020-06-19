@@ -17,7 +17,7 @@ class SoupMenuViewController: UITableViewController {
         case newOrder = "Show New Order Detail Segue"
     }
     
-    private var menuItems: [MenuItem] = SoupMenuManager().availableRegularItems
+    private var menuItems: [MenuItem] = SoupMenuManager().findItems(exactlyMatching: [.available, .regularItem], [.available, .dailySpecialItem])
     
     override var userActivity: NSUserActivity? {
         didSet {
@@ -45,7 +45,7 @@ class SoupMenuViewController: UITableViewController {
             
             if let order = order {
                 // Pass the represented menu item to OrderDetailTableConfiguration.
-                let orderType = OrderDetailTableConfiguration(orderType: .new)
+                let orderType = OrderDetailTableConfiguration(for: .newOrder)
                 destination.configure(tableConfiguration: orderType, order: order)
             }
         }
@@ -65,7 +65,7 @@ extension SoupMenuViewController {
         let menuItem = menuItems[indexPath.row]
         cell.imageView?.image = UIImage(named: menuItem.iconImageName)
         cell.imageView?.applyRoundedCorners()
-        cell.textLabel?.text = menuItems[indexPath.row].itemName
+        cell.textLabel?.text = menuItems[indexPath.row].localizedName()
         cell.textLabel?.numberOfLines = 0
         return cell
     }

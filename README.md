@@ -47,9 +47,9 @@ Soup Chef marks each shortcut type with *Supports background execution*; this wa
 The `OrderSoup` intent includes a set of custom responses that Siri shows to the user. Siri selects the response based on a code returned by intent extension when it confirms or handles the intent. For example, if the user orders a cup of chili and chili isn’t on the menu that day, the extension returns the `failureOutOfStock` code. Siri then responds to the user with “Sorry, we’re all out of chili.”
 
 ``` swift
-if menuItem.isAvailable == false {
+if menuItem.attributes.contains(.available) == false {
     //  Here's an example of how to use a custom response for a failure case when a particular soup item is unavailable.
-    completion(OrderSoupIntentResponse.failureOutOfStock(soup: intent.soup))
+    completion(OrderSoupIntentResponse.failureOutOfStock(soup: soup))
     return
 }
 ```
@@ -117,12 +117,12 @@ override func restoreUserActivityState(_ activity: NSUserActivity) {
 
 ## Add Phrases to Siri
 
-Ordering soup based on suggestions from Siri is a great start to expediting soup orders, but Soup Chef goes one step further by letting the user record a voice phrase for a particular order, and adding that phrase to Siri. Afterwards, the user can ask Siri to place the order by saying the phrase. For example, the user can add to Siri the phrase, “Clam chowder time,” for the shortcut that orders clam chowder with croutons. The next time the user craves clam chowder, they say to Siri, “Clam chowder time,” and Siri tells Soup Chef to place an order for clam chowder with croutons.
+Ordering soup based on suggestions from Siri is a great start to expediting soup orders, but Soup Chef goes one step further by letting the user set a voice phrase for a particular order, and adding that phrase to Siri. Afterwards, the user can ask Siri to place the order by saying the phrase. For example, the user can add to Siri the phrase, “Clam chowder time,” for the shortcut that orders clam chowder with croutons. The next time the user craves clam chowder, they say to Siri, “Clam chowder time,” and Siri tells Soup Chef to place an order for clam chowder with croutons.
 
-Users can record custom phrases in the Siri settings section of the Settings app on their iPhone or iPad. To make the experience better, however, Soup Chef provides the option to add the phrase directly from the app. From the order history, the user can tap a previous order to view its details. At the bottom of the order details is an *Add to Siri* button that, when tapped, lets the user record a new phrase. Soup Chef also provides a suggested phrase to help inspire the user.
+Users can set custom phrases in the Shortcuts app on their iPhone or iPad. To make the experience better, however, Soup Chef provides the option to add the phrase directly from the app. From the order history, the user can tap a previous order to view its details. At the bottom of the order details is an *Add to Siri* button that, when tapped, lets the user set a new phrase. Soup Chef also provides a suggested phrase to help inspire the user.
 
 ``` swift
-let addShortcutButton = INUIAddVoiceShortcutButton(style: .whiteOutline)
+let addShortcutButton = INUIAddVoiceShortcutButton(style: .automaticOutline)
 addShortcutButton.shortcut = INShortcut(intent: order.intent)
 addShortcutButton.delegate = self
 ```

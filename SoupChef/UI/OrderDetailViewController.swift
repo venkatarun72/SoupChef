@@ -16,7 +16,7 @@ class OrderDetailViewController: UITableViewController {
     
     private(set) var order: Order!
     
-    private var tableConfiguration: OrderDetailTableConfiguration = OrderDetailTableConfiguration(orderType: .new)
+    private var tableConfiguration: OrderDetailTableConfiguration = OrderDetailTableConfiguration(for: .newOrder)
     
     private weak var quantityLabel: UILabel?
     
@@ -34,7 +34,7 @@ class OrderDetailViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if tableConfiguration.orderType == .historical {
+        if tableConfiguration.purpose == .historicalOrder {
             navigationItem.rightBarButtonItem = nil
         }
         configureTableViewHeader()
@@ -44,14 +44,14 @@ class OrderDetailViewController: UITableViewController {
     private func configureTableViewHeader() {
         headerImageView.image = UIImage(named: order.menuItem.iconImageName)
         headerImageView.applyRoundedCorners()
-        headerLabel.text = order.menuItem.itemName
+        headerLabel.text = order.menuItem.localizedName()
         tableView.tableHeaderView = tableViewHeader
     }
     
     /// - Tag: add_to_siri_button
     private func configureTableFooterView() {
-        if tableConfiguration.orderType == .historical {
-            let addShortcutButton = INUIAddVoiceShortcutButton(style: .whiteOutline)
+        if tableConfiguration.purpose == .historicalOrder {
+            let addShortcutButton = INUIAddVoiceShortcutButton(style: .automaticOutline)
             addShortcutButton.shortcut = INShortcut(intent: order.intent)
             addShortcutButton.delegate = self
             
@@ -120,7 +120,7 @@ extension OrderDetailViewController {
             cell.textLabel?.text = NumberFormatter.currencyFormatter.string(from: (order.menuItem.price as NSDecimalNumber))
         case .quantity:
             if let cell = cell as? QuantityTableViewCell {
-                if tableConfiguration.orderType == .new {
+                if tableConfiguration.purpose == .newOrder {
                     // Save a weak reference to the quantityLabel for quick udpates, later.
                     quantityLabel = cell.quantityLabel
                     cell.stepper.addTarget(self, action: #selector(OrderDetailViewController.stepperDidChange(_:)), for: .valueChanged)
@@ -134,7 +134,7 @@ extension OrderDetailViewController {
              Maintain a mapping of [rawValue: localizedValue] in order to help instanitate Order.MenuItemTopping enum
              later when a topping is selected in the table view.
              */
-            let topping = Order.MenuItemTopping.all[indexPath.row]
+            let topping = Order.MenuItemTopping.allCases[indexPath.row]
             let localizedValue = topping.rawValue
             toppingMap[localizedValue] = topping.rawValue
             
@@ -155,7 +155,7 @@ extension OrderDetailViewController {
     // MARK: - Table view delegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableConfiguration.sections[indexPath.section].type == .toppings && tableConfiguration.orderType == .new {
+        if tableConfiguration.sections[indexPath.section].type == .toppings && tableConfiguration.purpose == .newOrder {
             
             guard let cell = tableView.cellForRow(at: indexPath),
                 let cellText = cell.textLabel?.text,
