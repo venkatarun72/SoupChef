@@ -9,15 +9,21 @@ import UIKit
 import SoupKit
 import os.log
 
-class SoupMenuViewController: UITableViewController {
+class SoupMenuViewController: UIViewController {
+        
+    private var menuItems: [MenuItem] = SoupMenuManager().findItems(exactlyMatching: [.available, .regularItem], [.available, .dailySpecialItem])
     
-    private static let cellReuseIdentifier = "SoupMenuItemDetailCell"
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureCollectionView()
+        configureDataSource()
+    }
+      
+    // MARK: - Navigation
     
     private enum SegueIdentifiers: String {
         case newOrder = "Show New Order Detail Segue"
     }
-    
-    private var menuItems: [MenuItem] = SoupMenuManager().findItems(exactlyMatching: [.available, .regularItem], [.available, .dailySpecialItem])
     
     override var userActivity: NSUserActivity? {
         didSet {
@@ -27,46 +33,70 @@ class SoupMenuViewController: UITableViewController {
         }
     }
 
-    // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifiers.newOrder.rawValue {
             guard let destination = segue.destination as? OrderDetailViewController else { return }
             
             var order: Order?
             
-            if sender as? UITableViewCell? != nil,
-                let indexPath = tableView.indexPathForSelectedRow {
-                order = Order(quantity: 1, menuItem: menuItems[indexPath.row], menuItemToppings: [])
+            if let sender = sender as? MenuItem {
+                order = Order(quantity: 1, menuItem: sender, menuItemToppings: [])
             } else if let activity = sender as? NSUserActivity,
                 let orderIntent = activity.interaction?.intent as? OrderSoupIntent {
                 order = Order(from: orderIntent)
             }
             
             if let order = order {
-                // Pass the represented menu item to OrderDetailTableConfiguration.
-                let orderType = OrderDetailTableConfiguration(for: .newOrder)
-                destination.configure(tableConfiguration: orderType, order: order)
+                destination.order = order
             }
         }
     }
-}
-
-extension SoupMenuViewController {
     
-    // MARK: - UITableViewDataSource
+    // MARK: - Collection View Setup
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuItems.count
+    private enum Section {
+        case menu
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SoupMenuViewController.cellReuseIdentifier, for: indexPath)
-        let menuItem = menuItems[indexPath.row]
-        cell.imageView?.image = UIImage(named: menuItem.iconImageName)
-        cell.imageView?.applyRoundedCorners()
-        cell.textLabel?.text = menuItems[indexPath.row].localizedName()
-        cell.textLabel?.numberOfLines = 0
-        return cell
+    private var dataSource: UICollectionViewDiffableDataSource<Section, MenuItem>! = nil
+    private var collectionView: UICollectionView! = nil
+    
+    func configureCollectionView() {
+        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
+        
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        view.addSubview(collectionView)
+        collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.collectionView = collectionView
+        collectionView.delegate = self
+    }
+
+    func configureDataSource() {
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MenuItem> { cell, indexPath, menuItem in
+            var contentConfiguration = UIListContentConfiguration.cell()
+            contentConfiguration.text = menuItem.localizedName()
+            contentConfiguration.image = UIImage(named: menuItem.iconImageName)
+            contentConfiguration.imageProperties.cornerRadius = 8
+            cell.contentConfiguration = contentConfiguration
+            cell.accessories = [.disclosureIndicator()]
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource<Section, MenuItem>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, item: MenuItem) -> UICollectionViewCell? in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        }
+
+        var snapshot = NSDiffableDataSourceSectionSnapshot<MenuItem>()
+        snapshot.append(menuItems)
+        dataSource.apply(snapshot, to: .menu, animatingDifferences: false)
+    }
+}
+
+extension SoupMenuViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let menuItem = menuItems[indexPath.item]
+        performSegue(withIdentifier: SegueIdentifiers.newOrder.rawValue, sender: menuItem)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

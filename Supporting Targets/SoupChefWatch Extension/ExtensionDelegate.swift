@@ -6,7 +6,7 @@ The watch extension delegate.
 */
 
 import WatchKit
-import SoupKitWatch
+import SoupKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
@@ -31,7 +31,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         } else if userActivity.activityType == NSUserActivity.orderCompleteActivityType,
             (userActivity.userInfo?[NSUserActivity.ActivityKeys.orderID.rawValue] as? UUID) != nil {
                 
-            // Order complete, go to the order history interface
+            // Order complete, go to the order history interface.
             rootController.pushController(withName: HistoryInterfaceController.controllerIdentifier, context: nil)
         }
     }

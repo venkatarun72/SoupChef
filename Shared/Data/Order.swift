@@ -10,7 +10,7 @@ import Contacts
 import CoreLocation
 import Intents
 
-public struct Order: Codable {
+public struct Order: Codable, Identifiable {
     
     public enum MenuItemTopping: String, Codable, CaseIterable, LocalizableShortcutString {
         case cheese = "Cheese"
@@ -48,7 +48,7 @@ public struct Order: Codable {
     ]
 
     public let date: Date
-    public let identifier: UUID
+    public let id: UUID
     public let menuItem: MenuItem
     public var quantity: Int
     public var menuItemToppings: Set<MenuItemTopping>
@@ -66,7 +66,7 @@ public struct Order: Codable {
                 menuItemToppings: Set<MenuItemTopping>,
                 storeLocation: Location? = nil) {
         self.date = date
-        self.identifier = identifier
+        self.id = identifier
         self.quantity = quantity
         self.menuItem = menuItem
         self.menuItemToppings = menuItemToppings
@@ -87,19 +87,12 @@ public struct Order: Codable {
 
 extension Order: Hashable {
     
-    ///  SoupChef considers orders with the same contents (menuItem, quantity, menuItemToppings) to be identical.
-    /// The data and idenfier properties are unique to an instance of an order (regardless of contents) and are not
-    /// considered when determining equality.
     public static func ==(lhs: Order, rhs: Order) -> Bool {
-        return lhs.menuItem == rhs.menuItem &&
-            rhs.quantity == lhs.quantity &&
-            rhs.menuItemToppings == lhs.menuItemToppings
+        return lhs.id == rhs.id
     }
 
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(menuItem)
-        hasher.combine(quantity)
-        hasher.combine(menuItemToppings)
+        hasher.combine(id)
     }
 }
 

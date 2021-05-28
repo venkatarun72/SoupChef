@@ -7,7 +7,7 @@ This type encapsulates the attributes of a soup menu item.
 
 import Foundation
 
-public struct MenuItem: Codable, Hashable {
+public struct MenuItem: Codable, Hashable, Identifiable {
     
     public enum Identifier: String, Codable {
         case chickenNoodleSoup
@@ -30,7 +30,7 @@ public struct MenuItem: Codable, Hashable {
         public static let secretItem = Attributes(rawValue: 1 << 3)
     }
     
-    public let identifier: Identifier
+    public let id: Identifier
     
     public let price: Decimal
     public var itemsInStock: Int
@@ -40,7 +40,7 @@ public struct MenuItem: Codable, Hashable {
 extension MenuItem {
     
     public var iconImageName: String {
-        switch identifier {
+        switch id {
         case .newEnglandClamChowder, .manhattanClamChowder:
             return "clam_chowder"
         case .chickenNoodleSoup:
@@ -78,7 +78,7 @@ extension MenuItem: LocalizableShortcutString {
     }
     
     private var localizedNameKey: String {
-        switch identifier {
+        switch id {
         case .newEnglandClamChowder:
             return "NE_CLAM_CHOWDER"
         case .manhattanClamChowder:
@@ -95,7 +95,7 @@ extension MenuItem: LocalizableShortcutString {
     }
     
     private var localizedDescriptionKey: String {
-        switch identifier {
+        switch id {
         case .newEnglandClamChowder:
             return "NE_CLAM_CHOWDER_DESCRIPTION"
         case .manhattanClamChowder:

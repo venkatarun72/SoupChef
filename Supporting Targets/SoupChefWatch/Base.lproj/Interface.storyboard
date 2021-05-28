@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17130" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WhV-gJ-beQ">
-    <device id="watch38"/>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="19115" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WhV-gJ-beQ">
+    <device id="watch40"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17104"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17031"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="19026"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -66,17 +66,26 @@
             </objects>
             <point key="canvasLocation" x="-23" y="-145"/>
         </scene>
-        <!--Close-->
+        <!--orderComplete-->
         <scene sceneID="QJc-we-Hp4">
             <objects>
-                <controller identifier="orderComplete" title="Close" fullScreen="YES" id="OTD-q3-Fvm" customClass="OrderConfirmedInterfaceController" customModule="SoupChefWatch_Extension">
+                <controller identifier="orderComplete" fullScreen="YES" id="OTD-q3-Fvm" customClass="OrderConfirmedInterfaceController" customModule="SoupChefWatch_Extension">
                     <items>
                         <group width="1" alignment="left" verticalAlignment="center" layout="vertical" id="Uu0-Uf-s8T">
                             <items>
-                                <label alignment="center" text="Order Confirmed" textAlignment="center" numberOfLines="0" id="5aV-OK-Q2r">
-                                    <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
-                                </label>
-                                <imageView width="60" height="60" alignment="center" verticalAlignment="center" id="wEj-OR-GYd"/>
+                                <group width="1" alignment="left" layout="vertical" id="9rA-6D-W9D">
+                                    <items>
+                                        <label alignment="center" text="Order Confirmed" textAlignment="center" numberOfLines="0" id="5aV-OK-Q2r">
+                                            <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
+                                        </label>
+                                        <imageView width="60" height="60" alignment="center" verticalAlignment="center" id="wEj-OR-GYd"/>
+                                    </items>
+                                </group>
+                                <button width="1" alignment="left" title="Close" id="X7e-y0-kCm">
+                                    <connections>
+                                        <action selector="dismissConfirmation" destination="OTD-q3-Fvm" id="SgV-2Q-qqP"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
                     </items>

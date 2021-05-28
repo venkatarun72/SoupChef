@@ -2,7 +2,7 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-Convenience utility to format numbers as currency
+Convenience utility to format numbers as currency.
 */
 
 import Foundation

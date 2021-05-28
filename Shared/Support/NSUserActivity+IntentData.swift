@@ -6,7 +6,7 @@ Convenience utility for working with NSUserActivity.
 */
 
 import Foundation
-import MobileCoreServices
+import UniformTypeIdentifiers
 
 #if canImport(CoreSpotlight)
     import CoreSpotlight
@@ -30,7 +30,7 @@ extension NSUserActivity {
         userActivity.isEligibleForPrediction = true
         
     #if canImport(CoreSpotlight)
-        let attributes = CSSearchableItemAttributeSet(itemContentType: kUTTypeContent as String)
+        let attributes = CSSearchableItemAttributeSet(contentType: UTType.content)
         
         attributes.thumbnailData = #imageLiteral(resourceName: "tomato").pngData() // Used as an icon in Search.
         attributes.keywords = ["Order", "Soup", "Menu"]

@@ -2,9 +2,9 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-This class shows soup order details. It can be configured for two possible order types.
- When configured with a 'new' order type, the view controller collects details of a new order.
- When configured with a 'historical' order type, the view controller displays details of a previously placed order.
+This class shows soup order details. When configured with a 'newOrder' purpose,
+ the view controller collects details of a new order. When configured with a 'historicalOrder'
+ purpose, the view controller displays details of a previously placed order.
 */
 
 import UIKit
@@ -12,166 +12,43 @@ import SoupKit
 import os.log
 import IntentsUI
 
-class OrderDetailViewController: UITableViewController {
+class OrderDetailViewController: UIViewController {
     
-    private(set) var order: Order!
+    enum Purpose {
+        case newOrder, historicalOrder
+    }
     
-    private var tableConfiguration: OrderDetailTableConfiguration = OrderDetailTableConfiguration(for: .newOrder)
-    
-    private weak var quantityLabel: UILabel?
-    
-    private weak var totalLabel: UILabel?
-    
-    private var toppingMap: [String: String] = [:]
-    
-    @IBOutlet var tableViewHeader: UIView!
-    @IBOutlet weak var headerImageView: UIImageView!
-    @IBOutlet weak var headerLabel: UILabel!
-    
-    @IBOutlet var tableFooterView: UIView!
-    
-    // MARK: - Setup Order Detail View Controller
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if tableConfiguration.purpose == .historicalOrder {
-            navigationItem.rightBarButtonItem = nil
+    var order: Order! {
+        didSet {
+            configureDataSource()
         }
-        configureTableViewHeader()
-        configureTableFooterView()
     }
-    
-    private func configureTableViewHeader() {
-        headerImageView.image = UIImage(named: order.menuItem.iconImageName)
-        headerImageView.applyRoundedCorners()
-        headerLabel.text = order.menuItem.localizedName()
-        tableView.tableHeaderView = tableViewHeader
-    }
-    
-    /// - Tag: add_to_siri_button
-    private func configureTableFooterView() {
-        if tableConfiguration.purpose == .historicalOrder {
-            let addShortcutButton = INUIAddVoiceShortcutButton(style: .automaticOutline)
-            addShortcutButton.shortcut = INShortcut(intent: order.intent)
-            addShortcutButton.delegate = self
-            
-            addShortcutButton.translatesAutoresizingMaskIntoConstraints = false
-            tableFooterView.addSubview(addShortcutButton)
-            tableFooterView.centerXAnchor.constraint(equalTo: addShortcutButton.centerXAnchor).isActive = true
-            tableFooterView.centerYAnchor.constraint(equalTo: addShortcutButton.centerYAnchor).isActive = true
-            
-            tableView.tableFooterView = tableFooterView
+    var purpose: Purpose = .newOrder {
+        didSet {
+            navigationItem.rightBarButtonItem = (purpose == .newOrder) ? orderButton : nil
         }
     }
     
-    func configure(tableConfiguration: OrderDetailTableConfiguration, order: Order) {
-        self.tableConfiguration = tableConfiguration
-        self.order = order
-    }
+    private var collectionView: UICollectionView! = nil
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
     
-    // MARK: - Target Action
+    private var titleCellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Item>!
+    private var sectionHeaderCellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Item>!
+    private var priceCellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Item>!
+    private var quantityCellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Item>!
+    private var choiceCellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Item>!
+    private var siriCellRegistration: UICollectionView.CellRegistration<AddToSiriCollectionViewCell, Item>!
     
-    @IBAction private func placeOrder(_ sender: UIBarButtonItem) {
-        if order.quantity == 0 {
-            os_log("Quantity must be greater than 0 to add to order")
-            return
-        }
-        performSegue(withIdentifier: "Place Order Segue", sender: self)
-    }
+    private var orderButton: UIBarButtonItem!
     
-    @IBAction private func stepperDidChange(_ sender: UIStepper) {
-        order.quantity = Int(sender.value)
-        quantityLabel?.text = "\(order.quantity)"
-        updateTotalLabel()
-    }
-    
-    private func updateTotalLabel() {
-        totalLabel?.text = order.localizedCurrencyValue
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        orderButton = navigationItem.rightBarButtonItem
+        configureCollectionView()
     }
 }
 
-extension OrderDetailViewController {
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableConfiguration.sections.count
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableConfiguration.sections[section].rowCount
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableConfiguration.sections[section].type.rawValue
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let sectionModel = tableConfiguration.sections[indexPath.section]
-        let reuseIdentifier = sectionModel.cellReuseIdentifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        configure(cell: cell, at: indexPath, with: sectionModel)
-        return cell
-    }
-    
-    private func configure(cell: UITableViewCell, at indexPath: IndexPath, with sectionModel: OrderDetailTableConfiguration.SectionModel) {
-        switch sectionModel.type {
-        case .price:
-            cell.textLabel?.text = NumberFormatter.currencyFormatter.string(from: (order.menuItem.price as NSDecimalNumber))
-        case .quantity:
-            if let cell = cell as? QuantityTableViewCell {
-                if tableConfiguration.purpose == .newOrder {
-                    // Save a weak reference to the quantityLabel for quick udpates, later.
-                    quantityLabel = cell.quantityLabel
-                    cell.stepper.addTarget(self, action: #selector(OrderDetailViewController.stepperDidChange(_:)), for: .valueChanged)
-                } else {
-                    cell.quantityLabel.text = "\(order.quantity)"
-                    cell.stepper.isHidden = true
-                }
-            }
-        case .toppings:
-            /*
-             Maintain a mapping of [rawValue: localizedValue] in order to help instanitate Order.MenuItemTopping enum
-             later when a topping is selected in the table view.
-             */
-            let topping = Order.MenuItemTopping.allCases[indexPath.row]
-            let localizedValue = topping.rawValue
-            toppingMap[localizedValue] = topping.rawValue
-            
-            cell.textLabel?.text = localizedValue
-            cell.accessoryType = order.menuItemToppings.contains(topping) ? .checkmark : .none
-            
-        case .total:
-            //  Save a weak reference to the totalLabel for making quick updates later.
-            totalLabel = cell.textLabel
-            
-            updateTotalLabel()
-        }
-    }
-}
-
-extension OrderDetailViewController {
-    
-    // MARK: - Table view delegate
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableConfiguration.sections[indexPath.section].type == .toppings && tableConfiguration.purpose == .newOrder {
-            
-            guard let cell = tableView.cellForRow(at: indexPath),
-                let cellText = cell.textLabel?.text,
-                let toppingRawValue = toppingMap[cellText],
-                let topping = Order.MenuItemTopping(rawValue: toppingRawValue) else { return }
-            
-            if order.menuItemToppings.contains(topping) {
-                order.menuItemToppings.remove(topping)
-                cell.accessoryType = .none
-            } else {
-                order.menuItemToppings.insert(topping)
-                cell.accessoryType = .checkmark
-            }
-        }
-    }
-}
+// MARK: - IntentsUI Delegates
 
 extension OrderDetailViewController: INUIAddVoiceShortcutButtonDelegate {
     
@@ -193,7 +70,7 @@ extension OrderDetailViewController: INUIAddVoiceShortcutViewControllerDelegate 
                                         didFinishWith voiceShortcut: INVoiceShortcut?,
                                         error: Error?) {
         if let error = error as NSError? {
-            os_log("Error adding voice shortcut: %@", log: OSLog.default, type: .error, error)
+            Logger().debug("Error adding voice shortcut \(error)")
         }
         
         controller.dismiss(animated: true, completion: nil)
@@ -210,7 +87,7 @@ extension OrderDetailViewController: INUIEditVoiceShortcutViewControllerDelegate
                                          didUpdate voiceShortcut: INVoiceShortcut?,
                                          error: Error?) {
         if let error = error as NSError? {
-            os_log("Error adding voice shortcut: %@", log: OSLog.default, type: .error, error)
+            Logger().debug("Error editing voice shortcut \(error)")
         }
         
         controller.dismiss(animated: true, completion: nil)
@@ -226,7 +103,239 @@ extension OrderDetailViewController: INUIEditVoiceShortcutViewControllerDelegate
     }
 }
 
-class QuantityTableViewCell: UITableViewCell {
-    @IBOutlet weak var quantityLabel: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
+// MARK: - Collection View Setup
+
+extension OrderDetailViewController: UICollectionViewDelegate {
+    private func configureCollectionView() {
+        let layout = createCollectionViewLayout()
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        view.addSubview(collectionView)
+        collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        collectionView.backgroundColor = .systemGroupedBackground
+        collectionView.delegate = self
+        self.collectionView = collectionView
+    }
+    
+    private func createCollectionViewLayout() -> UICollectionViewLayout {
+        let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            let section = self.visibleSections(for: self.purpose)[sectionIndex]
+            
+            var configuration: UICollectionLayoutListConfiguration
+            if section == .soupDescription || section == .siri {
+                configuration = UICollectionLayoutListConfiguration(appearance: .sidebar)
+            } else {
+                configuration = UICollectionLayoutListConfiguration(appearance: .grouped)
+                configuration.headerMode = .firstItemInSection
+            }
+            
+            configuration.backgroundColor = .systemGroupedBackground
+            
+            let sectionLayout = NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
+            return sectionLayout
+        }
+        return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        guard purpose == .newOrder else { return }
+        
+        if let item = dataSource.itemIdentifier(for: indexPath),
+           item.type == .choice,
+           let rawValue = item.rawValue,
+           let rawString = rawValue as? String,
+           let topping = Order.MenuItemTopping(rawValue: rawString) {
+            
+            if order.menuItemToppings.contains(topping) {
+                order.menuItemToppings.remove(topping)
+            } else {
+                order.menuItemToppings.insert(topping)
+            }
+            
+            updateSnapshot()
+        }
+    }
+}
+
+// MARK: - Collection View Data Mangement
+
+extension OrderDetailViewController {
+    
+    private enum Section: String {
+        case soupDescription
+        case price = "Price"
+        case quantity = "Quantity"
+        case toppings = "Toppings"
+        case total = "Total"
+        case siri
+    }
+    
+    private enum CellType {
+        case titleBanner
+        case sectionHeader
+        case price // Unit price and total price
+        case quantity // Number of units
+        case choice // Toppings
+        case siri
+    }
+    
+    private class Item: Hashable, Identifiable {
+        let type: CellType
+        let text: String?
+        let rawValue: AnyHashable?
+        let enabled: Bool
+        
+        init(type: CellType, text: String? = nil, rawValue: AnyHashable? = nil, enabled: Bool = false) {
+            self.type = type
+            self.text = text
+            self.rawValue = rawValue
+            self.enabled = enabled
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+        
+        static func == (lhs: Item, rhs: Item) -> Bool {
+            return lhs.id == rhs.id
+        }
+    }
+    
+    private func visibleSections(for purpose: OrderDetailViewController.Purpose) -> [Section] {
+        if purpose == .newOrder {
+            return [.soupDescription, .price, .quantity, .toppings, .total]
+        } else {
+            return [.soupDescription, .quantity, .toppings, .total, .siri]
+        }
+    }
+    
+    private func items(for order: Order, in section: Section) -> [Item] {
+        switch section {
+        case .soupDescription:
+            return [Item(type: .titleBanner, text: order.menuItem.localizedName(), rawValue: order.menuItem)]
+        case .price:
+            return [Item(type: .sectionHeader, text: section.rawValue),
+                    Item(type: .price, text: NumberFormatter.currencyFormatter.string(from: (order.menuItem.price as NSDecimalNumber)))]
+        case .total:
+            return [Item(type: .sectionHeader, text: section.rawValue),
+                    Item(type: .price, text: NumberFormatter.currencyFormatter.string(from: (order.total as NSDecimalNumber)))]
+        case .quantity:
+            return [Item(type: .sectionHeader, text: section.rawValue),
+                    Item(type: .quantity, text: "\(order.quantity)", rawValue: order.quantity)]
+        case .toppings:
+            var toppings = Order.MenuItemTopping.allCases.map { (topping) -> Item in
+                Item(type: .choice, text: topping.localizedName(), rawValue: topping.rawValue, enabled: order.menuItemToppings.contains(topping))
+            }
+            let sectionHeader = Item(type: .sectionHeader, text: section.rawValue)
+            toppings.insert(sectionHeader, at: 0)
+            return toppings
+        case .siri:
+            return [Item(type: .siri)]
+        }
+    }
+    
+    private func configureDataSource() {
+        prepareCellRegistrations()
+            
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, item: Item) -> UICollectionViewCell? in
+            switch item.type {
+            case .titleBanner:
+                return collectionView.dequeueConfiguredReusableCell(using: self.titleCellRegistration, for: indexPath, item: item)
+            case .choice:
+                return collectionView.dequeueConfiguredReusableCell(using: self.choiceCellRegistration, for: indexPath, item: item)
+            case .price:
+                return collectionView.dequeueConfiguredReusableCell(using: self.priceCellRegistration, for: indexPath, item: item)
+            case .quantity:
+                return collectionView.dequeueConfiguredReusableCell(using: self.quantityCellRegistration, for: indexPath, item: item)
+            case .siri:
+                return collectionView.dequeueConfiguredReusableCell(using: self.siriCellRegistration, for: indexPath, item: item)
+            case .sectionHeader:
+                return collectionView.dequeueConfiguredReusableCell(using: self.sectionHeaderCellRegistration, for: indexPath, item: item)
+            }
+        }
+        
+        updateSnapshot()
+    }
+    
+    private func prepareCellRegistrations() {
+        titleCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
+            var content = cell.defaultContentConfiguration()
+            content.text = item.text
+            content.textProperties.font = UIFont.preferredFont(forTextStyle: .body)
+
+            if let menuItem = item.rawValue as? MenuItem {
+                content.image = UIImage(named: menuItem.iconImageName)
+                content.imageProperties.cornerRadius = 8
+                cell.contentConfiguration = content
+                cell.contentView.backgroundColor = .systemGroupedBackground
+            }
+        }
+
+        sectionHeaderCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
+            var content = cell.defaultContentConfiguration()
+            content.text = item.text
+            content.textProperties.font = UIFont.preferredFont(forTextStyle: .footnote)
+            cell.contentConfiguration = content
+        }
+
+        priceCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
+            var contentConfiguration = UIListContentConfiguration.cell()
+            contentConfiguration.text = item.text
+            cell.contentConfiguration = contentConfiguration
+        }
+
+        quantityCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
+            var contentConfiguration = UIListContentConfiguration.cell()
+            contentConfiguration.text = item.text
+            cell.contentConfiguration = contentConfiguration
+
+            let hidden = self.purpose == .historicalOrder
+            let stepper = self.createStepper(value: item.rawValue as? Double ?? 1)
+            var accessory = UICellAccessory.CustomViewConfiguration(customView: stepper, placement: .trailing(), isHidden: hidden)
+            accessory.reservedLayoutWidth = .actual
+            cell.accessories = [UICellAccessory.customView(configuration: accessory)]
+        }
+
+        choiceCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
+            var contentConfiguration = UIListContentConfiguration.cell()
+            contentConfiguration.text = item.text
+            cell.contentConfiguration = contentConfiguration
+            cell.accessories = item.enabled ? [.checkmark()] : []
+        }
+
+        siriCellRegistration = UICollectionView.CellRegistration<AddToSiriCollectionViewCell, Item> { cell, indexPath, item in
+            var contentConfiguration = AddToSiriCellContentConfiguration()
+            contentConfiguration.intent = self.order.intent
+            contentConfiguration.delegate = self
+            cell.contentConfiguration = contentConfiguration
+        }
+    }
+    
+    private func createStepper(value: Double) -> UIStepper {
+        let stepper = UIStepper()
+        stepper.value = value
+        stepper.minimumValue = 1
+        stepper.maximumValue = 100
+        stepper.stepValue = 1
+        stepper.addTarget(self, action: #selector(OrderDetailViewController.quantityStepperDidChange(_:)), for: .valueChanged)
+        return stepper
+    }
+    
+    private func updateSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        let sections = order != nil ? visibleSections(for: purpose) : []
+        snapshot.appendSections(sections)
+        for section in sections {
+            snapshot.appendItems(items(for: order, in: section), toSection: section)
+        }
+        dataSource.apply(snapshot, animatingDifferences: false, completion: nil)
+    }
+    
+    @objc
+    private func quantityStepperDidChange(_ sender: UIStepper) {
+        order.quantity = Int(sender.value)
+        updateSnapshot()
+    }
 }

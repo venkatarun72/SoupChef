@@ -7,7 +7,7 @@ A `WKInterfaceController` that displays confirmation an order was placed success
 
 import WatchKit
 import Foundation
-import SoupKitWatch
+import SoupKit
 
 /// Displays confirmation after placing an order.
 class OrderConfirmedInterfaceController: WKInterfaceController {
@@ -28,5 +28,9 @@ class OrderConfirmedInterfaceController: WKInterfaceController {
          */
         let orderManager = SoupOrderDataManager()
         orderManager.placeOrder(order: order)
+    }
+
+    @IBAction func dismissConfirmation() {
+        dismiss()
     }
 }

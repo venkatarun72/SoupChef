@@ -2,7 +2,7 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-Create a custom user interface that shows in the Siri interface, as well as with 3D touches on a shortcut on the Cover Sheet or in Spotlight.
+Create a custom user interface that shows in the Siri interface, as well by touch and holding on a shortcut on the Lock screen or in Spotlight.
 */
 
 import IntentsUI

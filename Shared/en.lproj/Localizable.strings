@@ -3,7 +3,7 @@ See LICENSE folder for this sample’s licensing information.
 
 Abstract:
 The strings in this file and `Localizable.stringsdict` demonstrate how to localize the information
- in an intent and a user activity when displayed in Siri, Search, the Cover Sheet, and the Shortcuts app.
+ in an intent and a user activity when displayed in Siri, Search, the Lock screen, and the Shortcuts app.
  Interface strings not used in these contexts are not localized.
 */
 

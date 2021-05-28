@@ -10,10 +10,10 @@ import os.log
 
 /// Provides storage configuration information to `DataManager`
 struct UserDefaultsStorageDescriptor {
-    /// A `String` value used as the key name when reading and writing to `UserDefaults`
+    /// A `String` value used as the key name when reading and writing to `UserDefaults`.
     let key: String
     
-    /// A key path to a property on `UserDefaults` for observing changes
+    /// A key path to a property on `UserDefaults` for observing changes.
     let keyPath: KeyPath<UserDefaults, Data?>
 }
 
@@ -72,7 +72,7 @@ public class DataManager<ManagedDataType: Codable> {
         }
     }
     
-    /// Notifies clients the data changed by posting a `Notification` with the key `dataChangedNotificationKey`
+    /// Notifies clients the data changed by posting a `Notification` with the key `dataChangedNotificationKey`.
     private func notifyClientsDataChanged() {
         NotificationCenter.default.post(Notification(name: dataChangedNotificationKey, object: self))
     }
@@ -86,7 +86,7 @@ public class DataManager<ManagedDataType: Codable> {
                 let decoder = PropertyListDecoder()
                 managedData = try decoder.decode(ManagedDataType.self, from: archivedData)
             } catch let error as NSError {
-                os_log("Error decoding data: %@", log: OSLog.default, type: .error, error)
+                Logger().debug("Error decoding data: \(error)")
             }
         }
     }
@@ -105,7 +105,7 @@ public class DataManager<ManagedDataType: Codable> {
                 self.notifyClientsDataChanged()
                 
             } catch let error as NSError {
-                os_log("Could not encode data %@", log: OSLog.default, type: .error, error)
+                Logger().debug("Could not encode data \(error)")
             }
         }
     }

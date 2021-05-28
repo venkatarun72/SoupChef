@@ -13,19 +13,19 @@ public typealias SoupMenu = Set<MenuItem>
 public class SoupMenuManager: DataManager<Set<MenuItem>> {
     
     private static let defaultMenu: SoupMenu = [
-        MenuItem(identifier: .chickenNoodleSoup,
+        MenuItem(id: .chickenNoodleSoup,
                  price: 4.55,
                  itemsInStock: 5,
                  attributes: [.available, .dailySpecialItem]),
-        MenuItem(identifier: .newEnglandClamChowder,
+        MenuItem(id: .newEnglandClamChowder,
                  price: 3.75,
                  itemsInStock: 7,
                  attributes: [.available, .regularItem]),
-        MenuItem(identifier: .manhattanClamChowder,
+        MenuItem(id: .manhattanClamChowder,
                  price: 3.50,
                  itemsInStock: 2,
                  attributes: [.available, .secretItem]),
-        MenuItem(identifier: .tomatoSoup,
+        MenuItem(id: .tomatoSoup,
                  price: 2.95,
                  itemsInStock: 4,
                  attributes: [.available, .regularItem])
@@ -66,7 +66,7 @@ extension SoupMenuManager {
     
     public func findItem(_ soup: Soup) -> MenuItem? {
         return dataAccessQueue.sync {
-            return managedData.first { $0.identifier == MenuItem.Identifier(rawValue: soup.identifier!) }
+            return managedData.first { $0.id == MenuItem.Identifier(rawValue: soup.identifier!) }
         }
     }
     

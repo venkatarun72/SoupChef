@@ -2,7 +2,7 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-Convenience utility for working with UserDefaults
+Convenience utility for working with UserDefaults.
 */
 
 import Foundation
@@ -10,7 +10,7 @@ import Foundation
 extension UserDefaults {
 
     /// - Tag: app_group
-    // Note: This project does not share data between iOS and watchOS. Orders placed on the watch will not display in the iOS order history.
+    // Note: This project does not share data between iOS and watchOS. Orders placed on watchOS will not display in the iOS order history.
     private static let AppGroup = "group.com.example.apple-samplecode.SoupChef.Shared"
     
     enum StorageKeys: String {

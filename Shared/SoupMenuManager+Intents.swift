@@ -18,22 +18,22 @@ extension SoupMenuManager {
         updateSuggestions()
     }
     
-    /// Each time an order is placed, we instantiate an INInteraction object and donate it to the system (see SoupOrderDataManager extension).
-    /// After instantiating the INInteraction, its identifier property is set to the same value as the identifier
-    /// property for the corresponding order. Compile a list of all the order identifiers to pass to the INInteraction delete method.
+    /// Each time an order is placed, we instantiate an `INInteraction` object and donate it to the system (see SoupOrderDataManager extension).
+    /// After instantiating the `INInteraction`, its identifier property is set to the same value as the identifier
+    /// property for the corresponding order. Compile a list of all the order identifiers to pass to the `INInteraction.delete(with:)` method.
     func removeDonation(for menuItem: MenuItem) {
         if menuItem.attributes.contains(.available) == false {
             guard let orderHistory = orderManager?.orderHistory else { return }
-            let ordersAssociatedWithRemovedMenuItem = orderHistory.filter { $0.menuItem.identifier == menuItem.identifier }
-            let orderIdentifiersToRemove = ordersAssociatedWithRemovedMenuItem.map { $0.identifier.uuidString }
+            let ordersAssociatedWithRemovedMenuItem = orderHistory.filter { $0.menuItem.id == menuItem.id }
+            let orderIdentifiersToRemove = ordersAssociatedWithRemovedMenuItem.map { $0.id.uuidString }
             
             INInteraction.delete(with: orderIdentifiersToRemove) { (error) in
                 if error != nil {
                     if let error = error as NSError? {
-                        os_log("Failed to delete interactions with error: %@", log: OSLog.default, type: .error, error)
+                        Logger().debug("Failed to delete interactions with error \(error)")
                     }
                 } else {
-                    os_log("Successfully deleted interactions")
+                    Logger().debug("Successfully deleted interactions")
                 }
             }
         }
@@ -75,9 +75,9 @@ extension SoupMenuManager {
             
         INRelevantShortcutStore.default.setRelevantShortcuts(secretMenuSuggestedShortcuts) { (error) in
             if let error = error as NSError? {
-                os_log("Providing relevant shortcut failed. \n%@", log: OSLog.default, type: .error, error)
+                Logger().debug("Providing relevant shortcut failed. \n\(error)")
             } else {
-                os_log("Providing relevant shortcut succeeded.")
+                Logger().debug("Providing relevant shortcut succeeded")
             }
         }
     }

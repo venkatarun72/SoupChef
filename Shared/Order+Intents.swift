@@ -13,7 +13,7 @@ extension Order {
         let orderSoupIntent = OrderSoupIntent()
         orderSoupIntent.quantity = quantity as NSNumber
         
-        orderSoupIntent.soup = Soup(identifier: menuItem.identifier.rawValue, display: menuItem.localizedName(useDeferredIntentLocalization: true))
+        orderSoupIntent.soup = Soup(identifier: menuItem.id.rawValue, display: menuItem.localizedName(useDeferredIntentLocalization: true))
         orderSoupIntent.orderType = orderType
         orderSoupIntent.setImage(INImage(named: menuItem.iconImageName), forParameterNamed: \OrderSoupIntent.soup)
         
@@ -71,7 +71,7 @@ extension Soup {
     
     @available(iOSApplicationExtension 14.0, watchOSApplicationExtension 7.0, *)
     convenience init(menuItem: MenuItem) {
-        self.init(identifier: menuItem.identifier.rawValue,
+        self.init(identifier: menuItem.id.rawValue,
                   display: menuItem.localizedName(useDeferredIntentLocalization: true),
                   subtitle: menuItem.localizedItemDescription(useDeferredIntentLocalization: true),
                   image: INImage(named: menuItem.iconImageName))
@@ -91,7 +91,7 @@ extension Soup: CaseIterable {
             if #available(iOSApplicationExtension 14.0, watchOSApplicationExtension 7.0, *) {
                 return Soup(menuItem: $0)
             } else {
-                return Soup(identifier: $0.identifier.rawValue, display: $0.localizedName(useDeferredIntentLocalization: true))
+                return Soup(identifier: $0.id.rawValue, display: $0.localizedName(useDeferredIntentLocalization: true))
             }
         }
     }

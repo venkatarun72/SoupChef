@@ -2,7 +2,7 @@
 See LICENSE folder for this sample’s licensing information.
 
 Abstract:
-IntentHandler that vends instances of OrderSoupIntentHandler for iOS
+IntentHandler that vends instances of `OrderSoupIntentHandler` for iOS.
 */
 
 import Intents

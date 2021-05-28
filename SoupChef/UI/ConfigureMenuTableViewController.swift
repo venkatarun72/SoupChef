@@ -3,7 +3,7 @@ See LICENSE folder for this sample’s licensing information.
 
 Abstract:
 This view controller allows you to enable and disable menu items from the active menu.
- `SoupMenuViewController` will display the active menu. When a menu item is disabled, any
+ `SoupMenuViewController` displays the active menu. When a menu item is disabled, any
  donated actions associated with the menu item are deleted from the system.
 */
 

@@ -7,7 +7,7 @@ A `WKInterfaceController` that displays a menu.
 
 import WatchKit
 import Foundation
-import SoupKitWatch
+import SoupKit
 import os.log
 
 /// Displays a table of menu items that can be ordered from the watch.
@@ -44,7 +44,7 @@ class MenuInterfaceController: WKInterfaceController {
         // Create rows for all of the items in the menu.
         for rowIndex in 0 ... tableData.count - 1 {
             guard let elementRow = interfaceTable.rowController(at: rowIndex) as? MenuItemRowController else {
-                os_log("Unexpected row controller")
+                Logger().debug("Unexpected row controller")
                 return
             }
             let rowData = tableData[rowIndex]

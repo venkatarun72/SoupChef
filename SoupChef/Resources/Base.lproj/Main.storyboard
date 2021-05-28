@@ -1,71 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14835.7" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zhO-OM-TLc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19082.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NiR-hT-NpK">
     <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14790.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19080.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Order History-->
-        <scene sceneID="eJV-ef-NmJ">
-            <objects>
-                <tableViewController id="Taf-9T-Cgq" customClass="OrderHistoryTableViewController" customModule="SoupChef" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="6IH-c8-2QZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SoupOrderDetailCell" textLabel="LDu-qa-iI9" detailTextLabel="Wsy-Bq-DnN" rowHeight="70" style="IBUITableViewCellStyleSubtitle" id="41N-Au-pPP">
-                                <rect key="frame" x="0.0" y="28" width="375" height="70"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="41N-Au-pPP" id="8mr-Zh-Cqz">
-                                    <rect key="frame" x="0.0" y="0.0" width="347.5" height="70"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="LDu-qa-iI9">
-                                            <rect key="frame" x="16" y="15" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wsy-Bq-DnN">
-                                            <rect key="frame" x="16" y="38.5" width="44" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="tax-DP-kPU" kind="show" identifier="Order Details" id="UvH-qW-306"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Taf-9T-Cgq" id="b2l-Hw-sT8"/>
-                            <outlet property="delegate" destination="Taf-9T-Cgq" id="jcq-5w-smR"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Order History" id="5qr-M3-GBX">
-                        <barButtonItem key="leftBarButtonItem" title="Configure Menu" id="fn3-3o-dYO">
-                            <connections>
-                                <segue destination="gMb-Rq-xdG" kind="presentation" identifier="Configure Menu" id="1HK-Pg-wDn"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="JnT-ll-iMv">
-                            <connections>
-                                <segue destination="4qX-79-2R6" kind="presentation" identifier="Soup Menu" id="9f6-ul-XwZ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ORF-LO-gq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1356" y="-74"/>
-        </scene>
         <!--Configure Menu-->
         <scene sceneID="5SB-93-Xhb">
             <objects>
@@ -73,10 +15,10 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="dhs-Cl-Rmg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Basic Cell" textLabel="lDd-jz-lsq" style="IBUITableViewCellStyleDefault" id="jgz-sR-QxL">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="43.5"/>
+                                <rect key="frame" x="0.0" y="49.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jgz-sR-QxL" id="gB4-05-AKc">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -109,70 +51,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hei-oE-r4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cm4-h5-KPJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2916" y="695"/>
+            <point key="canvasLocation" x="3534" y="152"/>
         </scene>
-        <!--OrderDetailViewController-->
-        <scene sceneID="JX8-L5-T9G">
+        <!--Order Details-->
+        <scene sceneID="c1V-5f-NqL">
             <objects>
-                <viewControllerPlaceholder storyboardName="OrderDetail" referencedIdentifier="OrderDetailViewController" id="tax-DP-kPU" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0PY-3u-CNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2916" y="-55"/>
-        </scene>
-        <!--Soup Menu-->
-        <scene sceneID="nr7-Xg-D7c">
-            <objects>
-                <tableViewController storyboardIdentifier="SoupMenuViewController" id="45J-ng-s2z" customClass="SoupMenuViewController" customModule="SoupChef" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VXW-u7-TcX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                <viewController id="4z9-TE-3mt" customClass="OrderDetailViewController" customModule="SoupChef" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fqL-B5-PUj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SoupMenuItemDetailCell" textLabel="61S-Bx-37D" rowHeight="70" style="IBUITableViewCellStyleDefault" id="P6R-OU-6cj">
-                                <rect key="frame" x="0.0" y="28" width="375" height="70"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P6R-OU-6cj" id="GZT-rA-AAA">
-                                    <rect key="frame" x="0.0" y="0.0" width="347.5" height="70"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="61S-Bx-37D">
-                                            <rect key="frame" x="16" y="0.0" width="323.5" height="70"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <connections>
-                                    <segue destination="tax-DP-kPU" kind="show" identifier="Show New Order Detail Segue" id="yhC-gq-G3c"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="45J-ng-s2z" id="9kV-rj-kzh"/>
-                            <outlet property="delegate" destination="45J-ng-s2z" id="LSh-g2-yUB"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Soup Menu" id="zXA-TR-H4w">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jlR-Uw-Xvw">
+                        <viewLayoutGuide key="safeArea" id="6bt-gG-1fb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Order Details" largeTitleDisplayMode="never" id="tlU-Ui-kEe">
+                        <barButtonItem key="rightBarButtonItem" title="Place Order" id="yod-0R-GcU">
                             <connections>
-                                <segue destination="smc-Lz-K4p" kind="unwind" unwindAction="unwindToOrderHistoryWithSegue:" id="bz6-6c-dag"/>
+                                <segue destination="ii7-0E-ETm" kind="unwind" unwindAction="placeNewOrderWithSegue:" id="vCQ-9r-qpk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cZZ-PO-oSu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="smc-Lz-K4p" userLabel="Exit" sceneMemberID="exit"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bvb-T0-5yP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ii7-0E-ETm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2916" y="-660"/>
+            <point key="canvasLocation" x="-722" y="1776"/>
+        </scene>
+        <!--Soup Menu-->
+        <scene sceneID="iQE-cQ-azX">
+            <objects>
+                <viewController id="K7n-7Q-5PT" customClass="SoupMenuViewController" customModule="SoupChef" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bOO-w4-HFA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Y3d-4F-fpa"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Soup Menu" id="l36-yW-mx5">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="K3Y-Zx-IbL">
+                            <connections>
+                                <segue destination="oOm-Dw-SR9" kind="unwind" unwindAction="unwindToOrderHistoryWithSegue:" id="mim-2n-3BG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="4z9-TE-3mt" kind="show" identifier="Show New Order Detail Segue" id="pv3-Iu-PFw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h2c-5Q-l1E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="oOm-Dw-SR9" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2004" y="997"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="2hF-yu-qHz">
+            <objects>
+                <splitViewController allowDoubleColumnStyle="YES" preferredDisplayMode="twoBeside" behavior="tile" presentsWithGesture="NO" id="NiR-hT-NpK" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="zhO-OM-TLc" kind="relationship" relationship="masterViewController" id="YCl-a6-gGH"/>
+                        <segue destination="4z9-TE-3mt" kind="relationship" relationship="detailViewController" id="esp-Sg-Zbf"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8J3-YI-n1b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-722" y="152"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g9D-EK-Pi5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zhO-OM-TLc" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="zhO-OM-TLc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="owY-Lq-sLo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -180,33 +126,72 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="H3K-oR-azb">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="Taf-9T-Cgq" kind="relationship" relationship="rootViewController" id="BEh-Sz-Yws"/>
+                        <segue destination="bGB-A3-hBy" kind="relationship" relationship="rootViewController" id="Vzt-Zm-Q3u"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6BI-kw-pXo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="583" y="-74"/>
+            <point key="canvasLocation" x="468" y="152"/>
+        </scene>
+        <!--Order History-->
+        <scene sceneID="wLD-dA-eCl">
+            <objects>
+                <viewController id="bGB-A3-hBy" customClass="OrderHistoryViewController" customModule="SoupChef" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gnK-j1-Nff">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="xtb-TB-mVi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Clear History" id="q27-8N-MPh">
+                            <connections>
+                                <action selector="clearHistory:" destination="bGB-A3-hBy" id="Bqk-ad-EQc"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Order History" id="Hdk-9O-buw">
+                        <barButtonItem key="leftBarButtonItem" title="Configure Menu" id="3cu-Mu-yGr">
+                            <connections>
+                                <segue destination="gMb-Rq-xdG" kind="popoverPresentation" identifier="Configure Menu" popoverAnchorBarButtonItem="3cu-Mu-yGr" id="sjn-0a-cB7">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="s77-3b-EEP">
+                            <connections>
+                                <segue destination="4qX-79-2R6" kind="presentation" identifier="Soup Menu" id="uW8-v3-Tg6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Hz-KJ-mzL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1231" y="152"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6u7-r3-noI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="4qX-79-2R6" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="E1D-EN-7VA"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="p2X-zC-ueW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="45J-ng-s2z" kind="relationship" relationship="rootViewController" id="Rcs-uY-y4V"/>
+                        <segue destination="K7n-7Q-5PT" kind="relationship" relationship="rootViewController" id="y3h-De-yft"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Fh-sk-VHF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2143" y="-660"/>
+            <point key="canvasLocation" x="1230" y="998"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lmo-uX-DHu">
@@ -224,10 +209,18 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfa-Rn-Fof" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2118" y="695"/>
+            <point key="canvasLocation" x="2735" y="152"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yhC-gq-G3c"/>
+        <segue reference="esp-Sg-Zbf"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

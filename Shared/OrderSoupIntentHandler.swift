@@ -12,17 +12,17 @@ import Intents
 public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
     
     // The Dynamic Options API allows you to provide a set of values for eligible parameters
-    // dynamically when the user is configuring this intent parameter in the Shortcuts app.
+    // dynamically when the user configures this intent parameter in the Shortcuts app.
     //
-    // This method will be called repeatedly while user is typing with the search term provided by the user.
+    // The system calls this method repeatedly while the user types their search term.
     @available(iOSApplicationExtension 14.0, watchOSApplicationExtension 7.0, *)
     public func provideSoupOptionsCollection(for intent: OrderSoupIntent,
                                              searchTerm: String?,
                                              with completion: @escaping (INObjectCollection<Soup>?, Error?) -> Void) {
         let soupMenuManager = SoupMenuManager()
         
-        // Dynamic search should only be adopted for searching large catalogs,
-        // not for filtering small static collections because the Shortcuts app supports filtering by default.
+        // Dynamic search should only be adopted for searching large catalogs, and not for small static colletions.
+        // The Shortcuts app supports filtering of small collections by default.
         let availableRegularItems = soupMenuManager.findItems(exactlyMatching: [.available, .regularItem],
                                                               searchTerm: searchTerm)
         let availableDailySpecialItems = soupMenuManager.findItems(exactlyMatching: [.available, .dailySpecialItem],
@@ -132,7 +132,7 @@ public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
         
         /*
         The confirm phase provides an opportunity for you to perform any final validation of the intent parameters and to
-        verify that any needed services are available. You might confirm that you can communicate with your company’s server
+        verify that any needed services are available. You might confirm that you can communicate with your company’s server.
          */
         let soupMenuManager = SoupMenuManager()
         guard let soup = intent.soup, let menuItem = soupMenuManager.findItem(soup) else {
@@ -165,13 +165,13 @@ public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
         let orderManager = SoupOrderDataManager()
         orderManager.placeOrder(order: order)
         
-        //  For the success case, we want to indicate a wait time to the user so that they know when their soup order will be ready.
-        //  Ths sample uses a hardcoded value, but your implementation could use a time returned by your server.
+        //  For the success case, we want to indicate a wait time so the user knows when their soup order will be ready.
+        //  This sample uses a hardcoded value, but your implementation could use a time returned by your server.
         let orderDate = Date()
         let readyDate = Date(timeInterval: 10 * 60, since: orderDate) // 10 minutes
         
         let userActivity = NSUserActivity(activityType: NSUserActivity.orderCompleteActivityType)
-        userActivity.addUserInfoEntries(from: [NSUserActivity.ActivityKeys.orderID.rawValue: order.identifier])
+        userActivity.addUserInfoEntries(from: [NSUserActivity.ActivityKeys.orderID.rawValue: order.id])
         
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .full
@@ -185,27 +185,11 @@ public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
         if let formattedWaitTime = formatter.string(from: orderDate, to: readyDate) {
             response = OrderSoupIntentResponse.success(orderDetails: orderDetails, soup: soup, waitTime: formattedWaitTime)
         } else {
-            // A fallback success code with a less specific message string
+            // A fallback success code with a less specific message string.
             response = OrderSoupIntentResponse.successReadySoon(orderDetails: orderDetails, soup: soup)
         }
         
         response.userActivity = userActivity
         completion(response)
     }
-    
-    // MARK: - Deprecated
-    // These methods provide backwards compatibility for `OrderSoupIntentHandling` on iOS 13
-    
-    public func provideSoupOptions(for intent: OrderSoupIntent, with completion: @escaping ([Soup]?, Error?) -> Void) {
-        completion(Soup.allCases, nil)
-    }
-    
-    public func provideToppingsOptions(for intent: OrderSoupIntent, with completion: @escaping ([Topping]?, Error?) -> Void) {
-        completion(Topping.allCases, nil)
-    }
-    
-    public func provideStoreLocationOptions(for intent: OrderSoupIntent, with completion: @escaping ([CLPlacemark]?, Error?) -> Void) {
-        completion(Order.storeLocations, nil)
-    }
-
 }

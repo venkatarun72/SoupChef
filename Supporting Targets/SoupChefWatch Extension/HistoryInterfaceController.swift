@@ -7,7 +7,7 @@ A `WKInterfaceController` that displays a list of previously placed orders.
 
 import WatchKit
 import Foundation
-import SoupKitWatch
+import SoupKit
 import os.log
 
 class HistoryInterfaceController: WKInterfaceController {
@@ -38,7 +38,7 @@ class HistoryInterfaceController: WKInterfaceController {
         // Create rows for all of the items in the menu.
         for rowIndex in 0 ... tableData.count - 1 {
             guard let elementRow = interfaceTable.rowController(at: rowIndex) as? HistoryItemRowController else {
-                os_log("Unexpected row controller")
+                Logger().debug("Unexpected row controller")
                 return
             }
             
