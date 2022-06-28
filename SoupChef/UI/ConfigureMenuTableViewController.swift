@@ -34,7 +34,7 @@ class ConfigureMenuTableViewController: UITableViewController {
     }
     
     private func reloadData() {
-        sectionData =  [SectionModel(sectionType: .visibleMenu,
+        sectionData = [SectionModel(sectionType: .visibleMenu,
                                      sectionHeaderText: "Visible Menu",
                                      sectionFooterText: "Uncheck a row to delete any donated shortcuts associated with the menu item.",
                                      rowContent: soupMenuManager.findItems(containing: [.regularItem], [.dailySpecialItem])),

@@ -54,11 +54,9 @@ extension Order {
     }
 }
 
-extension Topping: CaseIterable {
+extension Topping {
     
-    public typealias AllCases = [Topping]
-    
-    public static var allCases: [Topping] {
+    public static var allToppings: [Topping] {
         // Map menu item toppings to custom objects and provide them to the user.
         // The user will be able to choose one or more options.
         return Order.MenuItemTopping.allCases.map { (topping) -> Topping in
@@ -79,11 +77,9 @@ extension Soup {
     
 }
 
-extension Soup: CaseIterable {
+extension Soup {
     
-    public typealias AllCases = [Soup]
-    
-    public static var allCases: [Soup] {
+    public static var allSoups: [Soup] {
         let activeMenu = SoupMenuManager()
         
         return activeMenu.findItems(exactlyMatching: [.available, .regularItem], [.available, .dailySpecialItem]).map {

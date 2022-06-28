@@ -38,7 +38,7 @@ public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
     @available(iOSApplicationExtension 14.0, watchOSApplicationExtension 7.0, *)
     public func provideToppingsOptionsCollection(for intent: OrderSoupIntent,
                                                  with completion: @escaping (INObjectCollection<Topping>?, Error?) -> Void) {
-        completion(INObjectCollection(items: Topping.allCases), nil)
+        completion(INObjectCollection(items: Topping.allToppings), nil)
     }
     
     @available(iOSApplicationExtension 14.0, watchOSApplicationExtension 7.0, *)
@@ -66,7 +66,7 @@ public class OrderSoupIntentHandler: NSObject, OrderSoupIntentHandling {
     
     public func resolveSoup(for intent: OrderSoupIntent, with completion: @escaping (SoupResolutionResult) -> Void) {
         guard let soup = intent.soup else {
-            completion(SoupResolutionResult.disambiguation(with: Soup.allCases))
+            completion(SoupResolutionResult.disambiguation(with: Soup.allSoups))
             return
         }
         completion(SoupResolutionResult.success(with: soup))
