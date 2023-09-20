@@ -13,11 +13,11 @@ public typealias SoupMenu = Set<MenuItem>
 public class SoupMenuManager: DataManager<Set<MenuItem>> {
     
     private static let defaultMenu: SoupMenu = [
-        MenuItem(id: .chickenNoodleSoup,
+        MenuItem(id: .paneerNoodleSoup,
                  price: 4.55,
                  itemsInStock: 5,
                  attributes: [.available, .dailySpecialItem]),
-        MenuItem(id: .newEnglandClamChowder,
+        MenuItem(id: .newdelhitalcumpowder,
                  price: 3.75,
                  itemsInStock: 7,
                  attributes: [.available, .regularItem]),

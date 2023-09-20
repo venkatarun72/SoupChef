@@ -10,9 +10,9 @@ import Foundation
 public struct MenuItem: Codable, Hashable, Identifiable {
     
     public enum Identifier: String, Codable {
-        case chickenNoodleSoup
+        case paneerNoodleSoup
         case tomatoSoup
-        case newEnglandClamChowder
+        case newdelhitalcumpowder
         case manhattanClamChowder
     }
     
@@ -41,12 +41,14 @@ extension MenuItem {
     
     public var iconImageName: String {
         switch id {
-        case .newEnglandClamChowder, .manhattanClamChowder:
-            return "clam_chowder"
-        case .chickenNoodleSoup:
-            return "chicken_noodle_soup"
+        case .newdelhitalcumpowder:
+            return "new_delhi_talcum_powder"
+        case .paneerNoodleSoup:
+            return "paneer_noodles"
         case .tomatoSoup:
             return "tomato_soup"
+        case .manhattanClamChowder:
+            return "clam_chowder"
         }
     }
 }
@@ -79,12 +81,12 @@ extension MenuItem: LocalizableShortcutString {
     
     private var localizedNameKey: String {
         switch id {
-        case .newEnglandClamChowder:
-            return "NE_CLAM_CHOWDER"
+        case .newdelhitalcumpowder:
+            return "NEWDELHI_TALCUM_POWDER"
         case .manhattanClamChowder:
             return "MANHATTAN_CLAM_CHOWDER"
-        case .chickenNoodleSoup:
-            return "CHICKEN_NOODLE_SOUP"
+        case .paneerNoodleSoup:
+            return "PANEER_NOODLE_SOUP"
         case .tomatoSoup:
             return "TOMATO_SOUP"
         }
@@ -96,12 +98,12 @@ extension MenuItem: LocalizableShortcutString {
     
     private var localizedDescriptionKey: String {
         switch id {
-        case .newEnglandClamChowder:
-            return "NE_CLAM_CHOWDER_DESCRIPTION"
+        case .newdelhitalcumpowder:
+            return "NEWDELHI_TALCUM_POWDER_DESCRIPTION"
         case .manhattanClamChowder:
             return "MANHATTAN_CLAM_CHOWDER_DESCRIPTION"
-        case .chickenNoodleSoup:
-            return "CHICKEN_NOODLE_SOUP_DESCRIPTION"
+        case .paneerNoodleSoup:
+            return "PANEER_NOODLE_SOUP_DESCRIPTION"
         case .tomatoSoup:
             return "TOMATO_SOUP_DESCRIPTION"
         }

@@ -8,13 +8,14 @@ The strings in this file and `Localizable.stringsdict` demonstrate how to locali
 */
 
 "TOMATO_SOUP" = "Tomato Soup";
-"NE_CLAM_CHOWDER" = "New England Clam Chowder";
-"CHICKEN_NOODLE_SOUP" = "Chicken Noodle Soup";
+"NEWDELHI_TALCUM_POWDER" = "New Delhi Talcum Powder";
+"PANEER_NOODLE_SOUP" = "Paneer Noodle Soup";
+"MANHATTAN_CLAM_CHOWDER" = "Manhattan clam chowder";
 
 "TOMATO_SOUP_DESCRIPTION" = "Contains: Tomatoes";
-"NE_CLAM_CHOWDER_DESCRIPTION" = "Contains: Clams";
+"NEWDELHI_TALCUM_POWDER_DESCRIPTION" = "Contains: Talc";
 "MANHATTAN_CLAM_CHOWDER_DESCRIPTION" = "Contains: Clams, tomatoes";
-"CHICKEN_NOODLE_SOUP_DESCRIPTION" = "Contains: Chicken, noodles";
+"PANEER_NOODLE_SOUP_DESCRIPTION" = "Contains: paneer, noodles";
 
 "CHEESE" = "Cheese";
 "RED_PEPPER" = "Red Pepper";
